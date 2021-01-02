@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+R/estimate_parameters_bernoulli.R
+R/epicorex.R
+debug_setup.R

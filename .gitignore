@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+debug_setup.R
+R/estimate_parameters_bernoulli.R
+R/epicorex.R
+.DS_Store
