@@ -3,9 +3,5 @@
 .RData
 .Ruserdata
 debug_setup.R
-<<<<<<< HEAD
 
-=======
-.Rbuildignore
->>>>>>> dd381d20fabeeef023356a8517456accfa4f64c7
 
