@@ -46,12 +46,18 @@ sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, 
                      tcs = tcs[ord],
                      alpha = alpha[ord,],
                      p_y_given_x = p_y_given_x_3d[ord, , , drop = FALSE],
-                     theta = reorder_theta(theta, marginal_description, ord),
+                     theta = if(length(marginal_description) ==1){
+                         reorder_theta(theta, marginal_description, ord)
+                     } else {
+                         reorder_theta_epi(theta, marginal_description, ord)
+                     },
                      log_p_y = if(n_hidden ==1 ) { log_p_y} else {log_p_y[ord, ] },
                      log_z = log_z[ord,],
-                     dim_visible = if(marginal_description == "discrete"){
+                     dim_visible = if(length(marginal_description)==1) {
+                         if(marginal_description == "discrete"){
                              dim_visible
-                         } else { NULL },
+                         }
+                     } else { NULL },
                      iterations = length(tc_history),
                      tc_history = tc_history,
                      marginal_description = marginal_description

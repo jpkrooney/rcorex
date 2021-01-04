@@ -31,6 +31,7 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
     } else {
         stop("Invalid marginals (from fn calculate_marginals_on_samples()")
     }
+
     # Pack results into 4D array
     log_marg_x_4d <- array( unlist( calcs_results ),
                       dim = c(n_hidden, n_samples, dim_hidden, n_visible) )
