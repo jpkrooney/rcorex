@@ -27,15 +27,11 @@ mi_bootstrap <- function(data, marginal_description, minmarg, theta,
         if( length(marginal_description) == 1 ){
             temp_theta <- calculate_theta(data, p_y_given_x_3d, marginal_description,
                                           smooth_marginals, dim_visible )
-<<<<<<< HEAD
-        mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, minmarg, log_p_y,
-=======
         } else {
             temp_theta <- calculate_theta_epi(data, p_y_given_x_3d, marginal_description,
                                               smooth_marginals)
         }
-        mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, log_p_y,
->>>>>>> rekint documentation
+        mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, minmard, log_p_y,
                                   p_y_given_x_3d, dim_visible )
     }
 
