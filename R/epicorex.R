@@ -31,7 +31,11 @@
 #' \item{labels - a 2D matrix of dimensions \code{(nrow(data), n_hidden)} that assigns a dimension label for each hidden variable to each row of data.}
 #' }
 #'
+<<<<<<< HEAD
 #' @import matrixStats tensor
+=======
+#' @import matrixStats tensor future.apply
+>>>>>>> a8d57ebeb636b5c92fc37da1b9103e9fff0c0beb
 #' @importFrom gtools rdirichlet
 #' @export
 #'
