@@ -17,6 +17,9 @@ calculate_p_xi_given_y <- function(x_i, thetai, marginal_description, dim_visibl
     } else if(marginal_description == "discrete"){
         z <- marginal_p_discrete(x_i, thetai, dim_visible)
 
+    } else if(marginal_description == "bernoulli"){
+        z <- marginal_p_bernoulli(x_i, thetai)
+
     } else {
         stop("That marginal description is not impelemented")
     }

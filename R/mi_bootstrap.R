@@ -22,8 +22,13 @@ mi_bootstrap <- function(data, marginal_description, theta, log_p_y, p_y_given_x
     for( i in 1:n_permutes){
         samp <- sample(1:n_samples, size = n_samples, replace = FALSE)
         p_y_given_x_3d <- p_y_given_x_3d[, samp, , drop = FALSE]
-        temp_theta <- calculate_theta(data, p_y_given_x_3d, marginal_description,
+        if( length(marginal_description) == 1 ){
+            temp_theta <- calculate_theta(data, p_y_given_x_3d, marginal_description,
                                           smooth_marginals, dim_visible )
+        } else {
+            temp_theta <- calculate_theta_epi(data, p_y_given_x_3d, marginal_description,
+                                              smooth_marginals)
+        }
         mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, log_p_y,
                                   p_y_given_x_3d, dim_visible )
     }
