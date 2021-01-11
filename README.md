@@ -11,7 +11,7 @@ status](https://github.com/jpkrooney/rcorex/workflows/R-CMD-check/badge.svg)](ht
 
 The goal of rcorex is to …
 
-## Installation
+## Installation jjjj
 
 You can install the released version of rcorex from
 [CRAN](https://CRAN.R-project.org) with:
