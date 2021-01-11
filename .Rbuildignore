@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 debug_setup.R
 ^\.github$
+^README\.Rmd$
