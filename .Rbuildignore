@@ -3,3 +3,4 @@
 debug_setup.R
 ^\.github$
 ^README\.Rmd$
+^LICENSE\.md$
