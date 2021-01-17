@@ -3,5 +3,7 @@
 .RData
 .Ruserdata
 debug_setup.R
-
-
+.DS_Store
+R/.DS_Store
+tests/.DS_Store
+.Rbuildignore
