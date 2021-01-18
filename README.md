@@ -18,13 +18,13 @@ statistical software, specifically to replicate the functionality of the
 Bio CorEx Python module ( <https://github.com/gregversteeg/bio_corex> ).
 
 The theoretical framework behind the CorEx and Bio CorEx Python modules
-are laid out in the following academic papers: 1. [Discovering Structure
-in High-Dimensional Data Through Correlation
-Explanation](http://arxiv.org/abs/1406.1222) 2. [Maximally Informative
-Hierarchical Representions of High-Dimensional
-Data](https://arxiv.org/abs/1410.7404) 3. [Comprehensive discovery of
-subsample gene expression components by information explanation:
-therapeutic implications in
+are laid out in the following academic papers:  
+1\. [Discovering Structure in High-Dimensional Data Through Correlation
+Explanation](http://arxiv.org/abs/1406.1222)  
+2\. [Maximally Informative Hierarchical Representions of
+High-Dimensional Data](https://arxiv.org/abs/1410.7404)  
+3\. [Comprehensive discovery of subsample gene expression components by
+information explanation: therapeutic implications in
 cancer](https://bmcmedgenomics.biomedcentral.com/articles/10.1186/s12920-017-0245-6)
 
 ## Installation
