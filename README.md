@@ -98,7 +98,9 @@ data("iris")
 iris <- data.frame(iris , model.matrix(~iris$Species)[,2:3])
 iris$Species <- NULL
 
+
 # fit first layer of corex 
+# note the use of the repeats argument to run corex 5 times and choose the run which produced the maximal TC
 layer1 <- biocorex(iris, 3, 2, marginal_description = "gaussian", repeats = 5)
 #>  Calculating repeat # 1
 #>  Calculating repeat # 2
@@ -107,7 +109,6 @@ layer1 <- biocorex(iris, 3, 2, marginal_description = "gaussian", repeats = 5)
 #>  Calculating repeat # 5
 #> 1 out of 5 repeat runs of biocorex converged.
 #> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
-# note the use of the repeats argument to run corex 5 times and choose the run which produced the maximal TC
 
 # fit second layer of corex - note, n_hidden should be lower in the second layer than the first
 layer2 <- biocorex(layer1$labels, 1,2, marginal_description = "discrete", repeats = 5)
