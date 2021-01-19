@@ -82,7 +82,11 @@ fit1$labels[, 2]
 
 `rcorex` can also discovered hierarchical structure in data by using the
 labels output from an `rcorex` object as the input to the next layer in
-the hierarchy as follows:
+the hierarchy in the following example. Also note the use of the
+`repeats = 5` argument to `biocorex`. The acts to run biocorex not once,
+but 5 times and biocorex automatically selects the run which produces
+the maximal TC to return to the user (unless the `return_all_runs`
+argument is set to `TRUE`).
 
 ``` r
 library(rcorex)
@@ -98,9 +102,7 @@ data("iris")
 iris <- data.frame(iris , model.matrix(~iris$Species)[,2:3])
 iris$Species <- NULL
 
-
 # fit first layer of corex 
-# note the use of the repeats argument to run corex 5 times and choose the run which produced the maximal TC
 layer1 <- biocorex(iris, 3, 2, marginal_description = "gaussian", repeats = 5)
 #>  Calculating repeat # 1
 #>  Calculating repeat # 2
@@ -110,21 +112,8 @@ layer1 <- biocorex(iris, 3, 2, marginal_description = "gaussian", repeats = 5)
 #> 1 out of 5 repeat runs of biocorex converged.
 #> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
 
-# fit second layer of corex - note, n_hidden should be lower in the second layer than the first
-layer2 <- biocorex(layer1$labels, 1,2, marginal_description = "discrete", repeats = 5)
-#>  Calculating repeat # 1
-#>  Calculating repeat # 2
-#>  Calculating repeat # 3
-#>  Calculating repeat # 4
-#>  Calculating repeat # 5
-#> 5 out of 5 repeat runs of biocorex converged.
-#> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
-
 # make a network tidygraph of only one layer
 g1 <- make_corex_tidygraph( layer1 )
-
-# make a network tidygraph of hierarchical layers
-g_hier <- make_corex_tidygraph( list(layer1, layer2))
 
 # Plot network graph of single layer
 ggraph(g1, layout = "fr") +
@@ -135,9 +124,30 @@ ggraph(g1, layout = "fr") +
   theme_graph()
 ```
 
-<img src="man/figures/README-iris_example-1.png" width="100%" />
+<img src="man/figures/README-iris_example_layer1-1.png" width="100%" />
+
+We can then use the labels from `layer1` as the input for a second layer
+of corex to discover hierarchical structure. Note that the value used
+for n\_hidden should be lower in the second layer than it was in the
+first.
 
 ``` r
+
+# fit second layer of corex
+layer2 <- biocorex(layer1$labels, 1,2, marginal_description = "discrete", repeats = 5)
+#>  Calculating repeat # 1
+#>  Calculating repeat # 2
+#>  Calculating repeat # 3
+#>  Calculating repeat # 4
+#>  Calculating repeat # 5
+#> 5 out of 5 repeat runs of biocorex converged.
+#> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
+
+
+
+# make a network tidygraph of hierarchical layers
+g_hier <- make_corex_tidygraph( list(layer1, layer2))
+
 
 # Plot network graph of hierarchical layers
 ggraph(g_hier, layout = "fr") +
@@ -148,4 +158,4 @@ ggraph(g_hier, layout = "fr") +
   theme_graph()
 ```
 
-<img src="man/figures/README-iris_example-2.png" width="100%" />
+<img src="man/figures/README-iris_example_layer2-1.png" width="100%" />
