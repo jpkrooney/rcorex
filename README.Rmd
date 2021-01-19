@@ -34,3 +34,31 @@ rcorex can be installed from Github:
 ```{r gh-instal, eval = FALSE}
 devtools::install_github("jpkrooney/rcorex")
 ```
+
+
+## Minimal example
+To fit a CorEx model in rcorex we can use the `biocorex()` command. However, we first need to pay attention to the data types. Biocorex accepts a data.frame as input, however as with the Python implementation of Bio CorEx, all variables must have the same data-type and currently only discrete or continuous data are allowed.
+
+As a brief example we will use the iris dataset. The iris data set has 4 continuous variables and one factor variable. Therefore in order to fit the iris dataset using `biocorex()` we must either omit the `Species` variable of convert it to dummy variables. Since this is an important variable in this dataset and we do not wish to omit it we will convert if to dummy variables using `model.matrix()`.
+
+```{r iris_prep}
+data(iris)
+# Use model matrix to make dummy vars - note we exclude the Intercept column produced
+dummies <- model.matrix(~Species, iris)[,-1]
+# join dummy vars to iris
+iris <- data.frame(iris, dummies)
+# remove original as we don't want to put this into biocorex
+iris$Species <- NULL
+```
+
+With the data prepared, we are now ready to fit ```biocorex()```
+```{r layer1}
+library(rcorex)
+# fit biocorex
+set.seed(1234)
+layer1 <- biocorex(iris, n_hidden = 1, dim_hidden = 3, marginal_description = "gaussian")
+```
+
+
+```
+

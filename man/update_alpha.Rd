@@ -4,15 +4,7 @@
 \alias{update_alpha}
 \title{update_alpha}
 \usage{
-update_alpha(
-  data,
-  p_y_given_x_3d,
-  tcs,
-  tc_min,
-  log_p_y,
-  log_marg_x_4d,
-  testmode = FALSE
-)
+update_alpha(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_4d)
 }
 \arguments{
 \item{data}{Data provided by user.}
@@ -26,8 +18,6 @@ update_alpha(
 \item{log_p_y}{A 2D matrix representing the log of the marginal probability of the latent variables.}
 
 \item{log_marg_x_4d}{A 4D array that contains the value of the marginal distribution for each variable, for each dimension of each hidden variable and for each data row.}
-
-\item{testmode}{TO BE REMOVED If TRUE data is not randomly samples}
 }
 \value{
 Returns an updated alpha matrix - an adjacency matrix between input variables and hidden variables.

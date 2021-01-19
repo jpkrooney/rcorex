@@ -10,7 +10,6 @@
 #' @param smooth_marginals Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.
 #' @param eps The maximal change in TC across 10 iterations needed signal convergence
 #' @param verbose Default FALSE. If TRUE, biocorex feeds back to user the iteration count and TCS each iteration. Useful to see progression if fitting a larger dataset.
-#' @param testmode TO BE REMOVED
 #' @param repeats How many times to run biocorex on the data using random initial values. Corex will return the run which leads to the maximum TC. Default is 1. For a new dataset, recommend to leave it as 1 to see how long biocorex takes, however for more trustworthy results a higher numbers recommended (e.g. 25).
 #' @param return_all_runs Default FALSE. If FALSE biocorex returns a single object of class rcorex. If TRUE biocorex returns all runs of biocorex as a list - the length of which = \code{repeats}. In this case the returned results are not rcorex objects, but have the same components of an rcorex object with class list.
 #' @param max_iter numeric. Maximum number of iterations before ending. Default = 100
@@ -40,7 +39,7 @@
 #'
 biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = "gaussian",
                      smooth_marginals = FALSE, eps = 1e-6, verbose = FALSE,
-                     testmode = FALSE, repeats = 1, return_all_runs = FALSE, max_iter = 100){
+                     repeats = 1, return_all_runs = FALSE, max_iter = 100){
 
     # Capture arguments for return to user in rcorex object
     cl <- match.call()
@@ -108,7 +107,7 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
 
             # Structure learning step
             if (n_hidden > 1){
-                alpha <- update_alpha(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_4d, testmode)
+                alpha <- update_alpha(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_4d)
             }
 
             latent <- calculate_latent(data, alpha, log_p_y, log_marg_x_4d)

@@ -12,7 +12,6 @@ biocorex(
   smooth_marginals = FALSE,
   eps = 1e-06,
   verbose = FALSE,
-  testmode = FALSE,
   repeats = 1,
   return_all_runs = FALSE,
   max_iter = 100
@@ -32,8 +31,6 @@ biocorex(
 \item{eps}{The maximal change in TC across 10 iterations needed signal convergence}
 
 \item{verbose}{Default FALSE. If TRUE, biocorex feeds back to user the iteration count and TCS each iteration. Useful to see progression if fitting a larger dataset.}
-
-\item{testmode}{TO BE REMOVED}
 
 \item{repeats}{How many times to run biocorex on the data using random initial values. Corex will return the run which leads to the maximum TC. Default is 1. For a new dataset, recommend to leave it as 1 to see how long biocorex takes, however for more trustworthy results a higher numbers recommended (e.g. 25).}
 

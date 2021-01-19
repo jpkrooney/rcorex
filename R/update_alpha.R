@@ -6,10 +6,9 @@
 #' @param tc_min Minimum value which is allowed for TC for any given hidden variable.
 #' @param log_p_y A 2D matrix representing the log of the marginal probability of the latent variables.
 #' @param log_marg_x_4d A 4D array that contains the value of the marginal distribution for each variable, for each dimension of each hidden variable and for each data row.
-#' @param testmode TO BE REMOVED If TRUE data is not randomly samples
 #' @return Returns an updated alpha matrix - an adjacency matrix between input variables and hidden variables.
 #'
-update_alpha <- function(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_4d, testmode = FALSE){
+update_alpha <- function(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_4d){
 
     # Extract important dimensions regarding data and hidden factors
     n_hidden = dim(p_y_given_x_3d)[1]
