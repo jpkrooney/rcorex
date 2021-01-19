@@ -23,7 +23,7 @@ plot.rcorex <- function(x, ...) {
                                  tcs = totals))
 
     g <- ggplot(data = subset(df1, cluster != "Total"), aes(x=iters, y = tcs, col=cluster)) +
-        geom_line() +
+        geom_line() + xlab("iterations") + ylab("TC") +
         geom_line(data = subset(df1, cluster == "Total"), colour="black", size=2) +
         theme_minimal() + ggtitle("Corex fit convergence")
     return(g)

@@ -56,6 +56,8 @@ data(iris)
 dummies <- model.matrix(~Species, iris)[,-1]
 # join dummy vars to iris
 iris <- data.frame(iris, dummies)
+# make a copy of the original variable for later comparison
+species <- iris$Species
 # remove original as we don't want to put this into biocorex
 iris$Species <- NULL
 ```
@@ -66,8 +68,42 @@ With the data prepared, we are now ready to fit `biocorex()`
 library(rcorex)
 # fit biocorex
 set.seed(1234)
-layer1 <- biocorex(iris, n_hidden = 1, dim_hidden = 3, marginal_description = "gaussian")
+fit1 <- biocorex(iris, n_hidden = 1, dim_hidden = 3, marginal_description = "gaussian")
 #> Calculating single iteration of corex
+
+# Plot the model convergence
+plot(fit1)
 ```
 
-\`\`\`
+<img src="man/figures/README-layer1-1.png" width="100%" />
+
+``` r
+
+# extract variable clusters
+fit1$clusters
+#>      Sepal.Length       Sepal.Width      Petal.Length       Petal.Width 
+#>                 0                 0                 0                 0 
+#> Speciesversicolor  Speciesvirginica 
+#>                 0                 0
+# all variables assigned to cluster 0 so this is not interesting in this case
+
+# look at row labels (i.e. dimension of each latent variable assigned to each row)
+head(fit1$labels)
+#>      [,1]
+#> [1,]    1
+#> [2,]    1
+#> [3,]    1
+#> [4,]    1
+#> [5,]    1
+#> [6,]    1
+
+# Lets compare the labels to the species variable saved earlier
+table(fit1$labels, species)
+#>    species
+#>     setosa versicolor virginica
+#>   0      0         50         1
+#>   1     50          0         0
+#>   2      0          0        49
+```
+
+`biocorex()` has correctly labeled the species for all but 1 row.
