@@ -72,15 +72,15 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
         inits <- initialise_parameters(data, n_hidden, dim_hidden )
         n_samples <- inits$n_samples
         n_visible <- inits$n_visible
-        dim_visible <- NULL # only used when discrete marginal_description = discrete
+        dim_visible <- NULL # only used when discrete marginal_description = "discrete"
         alpha <- inits$alpha
         p_y_given_x_3d <- inits$p_y_given_x_3d
         log_z <- inits$log_z
         if (marginal_description == "discrete"){
-            values_in_data <- sort(unique(unlist(data))) # Get the set of unique values in the data
+            values_in_data <- unique(sort(unlist(data))) # Get the set of unique values in the data
             values_in_data <- values_in_data[!is.na(values_in_data)] # remove NA if it is there
             dim_visible <- max(values_in_data) + 1
-            if( ! all(seq(0, (dim_visible - 1)) == values_in_data) ) {
+            if( ! all( seq(0, (dim_visible - 1)) == values_in_data) ) {
                 warning("Data matrix values should be consecutive integers starting with 0,1,...")
                 # consider to make this a stop error ?
             }

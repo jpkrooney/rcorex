@@ -38,72 +38,113 @@ devtools::install_github("jpkrooney/rcorex")
 ## Minimal example
 
 To fit a CorEx model in rcorex we can use the `biocorex()` command.
-However, we first need to pay attention to the data types. Biocorex
-accepts a data.frame as input, however as with the Python implementation
-of Bio CorEx, all variables must have the same data-type and currently
-only discrete or continuous data are allowed.
-
-As a brief example we will use the iris dataset. The iris data set has 4
-continuous variables and one factor variable. Therefore in order to fit
-the iris dataset using `biocorex()` we must either omit the `Species`
-variable of convert it to dummy variables. Since this is an important
-variable in this dataset and we do not wish to omit it we will convert
-if to dummy variables using `model.matrix()`.
-
-``` r
-data(iris)
-# Use model matrix to make dummy vars - note we exclude the Intercept column produced
-dummies <- model.matrix(~Species, iris)[,-1]
-# join dummy vars to iris
-iris <- data.frame(iris, dummies)
-# make a copy of the original variable for later comparison
-species <- iris$Species
-# remove original as we don't want to put this into biocorex
-iris$Species <- NULL
-```
-
-With the data prepared, we are now ready to fit `biocorex()`
+Biocorex accepts a data.frame or a matrix as input, however as with the
+Python implementation of Bio CorEx, all variables must have the same
+data-type and currently only discrete or continuous data are allowed.
 
 ``` r
 library(rcorex)
+# make a small dataset
+df1 <- matrix(c(0,0,0,0,0,
+             0,0,0,1,1,
+             1,1,1,0,0,
+             1,1,1,1,1), ncol=5, byrow = TRUE)
+
 # fit biocorex
 set.seed(1234)
-fit1 <- biocorex(iris, n_hidden = 1, dim_hidden = 3, marginal_description = "gaussian")
+fit1 <- biocorex(df1, n_hidden = 2, dim_hidden = 2, marginal_description = "discrete")
 #> Calculating single iteration of corex
-
-# Plot the model convergence
 plot(fit1)
 ```
 
-<img src="man/figures/README-layer1-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" width="100%" />
 
 ``` r
 
-# extract variable clusters
+# What was the total correlation for each hidden dimension ?
+fit1$tcs
+#> [1] 1.3847955 0.6921477
+
+# Which variables were clustered together?
 fit1$clusters
-#>      Sepal.Length       Sepal.Width      Petal.Length       Petal.Width 
-#>                 0                 0                 0                 0 
-#> Speciesversicolor  Speciesvirginica 
-#>                 0                 0
-# all variables assigned to cluster 0 so this is not interesting in this case
+#> [1] 0 0 0 1 1
 
-# look at row labels (i.e. dimension of each latent variable assigned to each row)
-head(fit1$labels)
-#>      [,1]
-#> [1,]    1
-#> [2,]    1
-#> [3,]    1
-#> [4,]    1
-#> [5,]    1
-#> [6,]    1
+# Which labels were assigned to each row of data for hidden cluster 1?
+fit1$labels[, 1]
+#> [1] 1 1 0 0
 
-# Lets compare the labels to the species variable saved earlier
-table(fit1$labels, species)
-#>    species
-#>     setosa versicolor virginica
-#>   0      0         50         1
-#>   1     50          0         0
-#>   2      0          0        49
+# And for hidden cluster 2?
+fit1$labels[, 2]
+#> [1] 0 1 0 1
 ```
 
-`biocorex()` has correctly labeled the species for all but 1 row.
+## Hierarchical corex
+
+`rcorex` can also discovered hierarchical structure in data by using the
+labels output from an `rcorex` object as the input to the next layer in
+the hierarchy as follows:
+
+``` r
+library(rcorex)
+library(ggraph)
+#> Loading required package: ggplot2
+
+set.seed(1234)
+
+# Load iris dataset
+data("iris")
+
+# Need to convert species factor variable to indicator variables
+iris <- data.frame(iris , model.matrix(~iris$Species)[,2:3])
+iris$Species <- NULL
+
+# fit first layer of corex 
+layer1 <- biocorex(iris, 3, 2, marginal_description = "gaussian", repeats = 5)
+#>  Calculating repeat # 1
+#>  Calculating repeat # 2
+#>  Calculating repeat # 3
+#>  Calculating repeat # 4
+#>  Calculating repeat # 5
+#> 1 out of 5 repeat runs of biocorex converged.
+#> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
+# note the use of the repeats argument to run corex 5 times and choose the run which produced the maximal TC
+
+# fit second layer of corex - note, n_hidden should be lower in the second layer than the first
+layer2 <- biocorex(layer1$labels, 1,2, marginal_description = "discrete", repeats = 5)
+#>  Calculating repeat # 1
+#>  Calculating repeat # 2
+#>  Calculating repeat # 3
+#>  Calculating repeat # 4
+#>  Calculating repeat # 5
+#> 5 out of 5 repeat runs of biocorex converged.
+#> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
+
+# make a network tidygraph of only one layer
+g1 <- make_corex_tidygraph( layer1 )
+
+# make a network tidygraph of hierarchical layers
+g_hier <- make_corex_tidygraph( list(layer1, layer2))
+
+# Plot network graph of single layer
+ggraph(g1, layout = "fr") +
+  geom_node_point(aes(size = node_size), show.legend = FALSE) +
+  geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
+  geom_node_text(aes(label = names), repel = TRUE) +
+  ggtitle("Single layer corex") +
+  theme_graph()
+```
+
+<img src="man/figures/README-iris_example-1.png" width="100%" />
+
+``` r
+
+# Plot network graph of hierarchical layers
+ggraph(g_hier, layout = "fr") +
+  geom_node_point(aes(size = node_size), show.legend = FALSE) +
+  geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
+  geom_node_text(aes(label = names), repel = TRUE) +
+  ggtitle("Hierarchical corex") +
+  theme_graph()
+```
+
+<img src="man/figures/README-iris_example-2.png" width="100%" />

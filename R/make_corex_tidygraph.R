@@ -18,10 +18,12 @@
 #' layer1 <- biocorex(iris, 3, 2, marginal_description = "gaussian", repeats = 5)
 #' layer2 <- biocorex(layer1$labels, 1,2, marginal_description = "discrete", repeats = 5)
 #'
-#' # make a tiygraph of one layer
+#' # make a tidygraph of one layer
 #' g1 <- make_corex_tidygraph( layer1 )
-#' g2 <- make_corex_tidygraph( list(layer1, layer2))
+#' # make a tidygraph of two layers
+#' g_hier <- make_corex_tidygraph( list(layer1, layer2))
 #'
+#' # Plot network graph of one layer
 #' ggraph(g1, layout = "fr") +
 #'     geom_node_point(aes(size = node_size), show.legend = FALSE) +
 #'     geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
@@ -29,7 +31,8 @@
 #'     geom_node_text(aes(label = names), repel = TRUE) +
 #'     theme_graph()
 #'
-#' ggraph(g2, layout = "fr") +
+#' # Plot network graph of both layers
+#' ggraph(g_hier, layout = "fr") +
 #'     geom_node_point(aes(size = node_size), show.legend = FALSE) +
 #'     geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
 #'     #scale_edge_width(range = c(0.2, 2)) +
