@@ -7,11 +7,13 @@
 
 [![R build
 status](https://github.com/jpkrooney/rcorex/workflows/R-CMD-check/badge.svg)](https://github.com/jpkrooney/rcorex/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/jpkrooney/rcorex/branch/master/graph/badge.svg)](https://codecov.io/gh/jpkrooney/rcorex?branch=master)
 <!-- badges: end -->
 
-Total correlation explanation is an unsupervised learning algorithm for
-discovering structure in high dimensional data. Total correlation
-explanation has been implemented in Python as CorEx and related modules
+Total correlation explanation is method for discovering latent structure
+in high dimensional data. Total correlation explanation has been
+implemented in Python as CorEx and related modules
 (<https://github.com/gregversteeg/CorEx>). The initial aim of rcorex is
 to implement Total Correlation Explanation in the R statistical
 software, specifically to replicate the functionality of the Bio CorEx
@@ -119,6 +121,7 @@ g1 <- make_corex_tidygraph( layer1 )
 ggraph(g1, layout = "fr") +
   geom_node_point(aes(size = node_size), show.legend = FALSE) +
   geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
+  scale_edge_width(range = c(0.3, 3)) +
   geom_node_text(aes(label = names), repel = TRUE) +
   ggtitle("Single layer corex") +
   theme_graph()
@@ -153,6 +156,7 @@ g_hier <- make_corex_tidygraph( list(layer1, layer2))
 ggraph(g_hier, layout = "fr") +
   geom_node_point(aes(size = node_size), show.legend = FALSE) +
   geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
+  scale_edge_width(range = c(0.3, 3)) +
   geom_node_text(aes(label = names), repel = TRUE) +
   ggtitle("Hierarchical corex") +
   theme_graph()
