@@ -34,7 +34,8 @@ cancer](https://bmcmedgenomics.biomedcentral.com/articles/10.1186/s12920-017-024
 rcorex can be installed from Github:
 
 ``` r
-devtools::install_github("jpkrooney/rcorex")
+# install.packages("remotes")
+remotes::install_github("jpkrooney/rcorex")
 ```
 
 ## Minimal example

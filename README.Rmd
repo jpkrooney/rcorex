@@ -33,7 +33,8 @@ The theoretical framework behind the CorEx and Bio CorEx Python modules are laid
 rcorex can be installed from Github:  
 
 ```{r gh-instal, eval = FALSE}
-devtools::install_github("jpkrooney/rcorex")
+# install.packages("remotes")
+remotes::install_github("jpkrooney/rcorex")
 ```
 
 
