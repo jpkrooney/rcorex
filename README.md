@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rcorex
+# rcorex <img src='man/figures/rcorexlogo.svg' align="right" height="139" />
 
 <!-- badges: start -->
 
