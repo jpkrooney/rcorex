@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_corex_tidygraph.R
 \name{make_corex_tidygraph}
 \alias{make_corex_tidygraph}
-\title{Make a tidygraph object from an rcorex object}
+\title{Make a tidygraph object from an rcorex object or objects}
 \usage{
 make_corex_tidygraph(corexes)
 }
