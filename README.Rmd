@@ -69,7 +69,7 @@ fit1$labels[, 2]
 
 
 ## Hierarchical corex example
-`rcorex` can search for hierarchical structure in data by using the labels output from an `rcorex` object as the input to the next layer in the hierarchy in the following example. Also note the use of the `repeats = 5` argument to `biocorex`. The acts to run biocorex not once, but 5 times and biocorex automatically selects the run which produces the maximal TC to return to the user (unless the `return_all_runs` argument is set to `TRUE`).
+`rcorex` can search for hierarchical structure in data by using the labels output from an `rcorex` object as the input to the next layer in the hierarchy in the following example. Also note the use of the `repeats = 5` argument to `biocorex`. The acts to run biocorex not once, but 5 times and biocorex automatically selects the run which produces the maximal TC to return to the user (unless the `return_all_runs` argument is set to `TRUE`). In the network graph, edge thickness is proportional to mutual information and node size represents mutual multivariate information among children.
 
 ```{r iris_example_layer1}
 library(rcorex)

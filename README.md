@@ -91,7 +91,9 @@ the hierarchy in the following example. Also note the use of the
 `repeats = 5` argument to `biocorex`. The acts to run biocorex not once,
 but 5 times and biocorex automatically selects the run which produces
 the maximal TC to return to the user (unless the `return_all_runs`
-argument is set to `TRUE`).
+argument is set to `TRUE`). In the network graph, edge thickness is
+proportional to mutual information and node size represents mutual
+multivariate information among children.
 
 ``` r
 library(rcorex)
