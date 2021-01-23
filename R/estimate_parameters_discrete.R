@@ -6,6 +6,7 @@
 #' @param smooth_marginals Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used as described in \strong{Pepke, S., Ver Steeg, G. Comprehensive discovery of subsample gene expression components by information explanation: therapeutic implications in cancer. BMC Med Genomics 10, 12 (2017).} \url{https://doi.org/10.1186/s12920-017-0245-6}
 #' @param dim_visible The dimension of the data provided in data - i.e. the number of discrete levels that exist in the data. Must be positive integer.
 #' @return Returns a 3D array of dimensions (dim_visible, n_hidden, dim_hidden) that represent the probability of each dim_visible occurring for each dim_hidden across each n_hidden.
+#' @keywords internal
 #'
 estimate_parameters_discrete <- function(x_i, p_y_given_x_3d, smooth_marginals, dim_visible){
 

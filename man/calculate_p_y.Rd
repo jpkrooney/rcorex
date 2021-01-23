@@ -15,3 +15,4 @@ A 2D matrix representing the log of the marginal probability of the latent varia
 \description{
 Internal function to calculate the marginal probability of latent variables
 }
+\keyword{internal}

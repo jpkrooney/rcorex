@@ -1,4 +1,6 @@
 library(hexSticker)
+library(rcorex)
+library(ggraph)
 data("sunspots")
 
 df <- data.frame(.preformat.ts(datasets::sunspots), stringsAsFactors = FALSE)
@@ -8,12 +10,12 @@ df <- data.frame(df)
 # Build a hierarchical corex
 set.seed(12345)
 L1 <- biocorex(df, 10, 2, marginal_description = "gaussian", repeats = 1)
-L2 <- biocorex(L1$labels, 6, 2, marginal_description = "gaussian", repeats = 1)
-L3 <- biocorex(L2$labels, 3, 2, marginal_description = "gaussian", repeats = 1)
-L4 <- biocorex(L2$labels, 1, 2, marginal_description = "gaussian", repeats = 1)
+L2 <- biocorex(L1$labels, 6, 2, marginal_description = "discrete", repeats = 1)
+L3 <- biocorex(L2$labels, 1, 2, marginal_description = "discrete", repeats = 1)
+#L4 <- biocorex(L2$labels, 1, 2, marginal_description = "discrete", repeats = 1)
 
 # make a tidygraph hierarchy
-g1 <- make_corex_tidygraph( list(L1, L2, L3, L4 ))
+g1 <- make_corex_tidygraph( list(L1, L2, L3 ))
 
 # Plot network graph
 p <- ggraph(g1, layout = "kk") +
@@ -23,8 +25,9 @@ p <- ggraph(g1, layout = "kk") +
 p <- p + theme_void() + theme_transparent()
 
 #Generate sticker
-sticker(p, package="rcorex", p_size=12, p_y =1.1, p_color = "#000000",
-        s_x=1, s_y=1, s_width=1.5, s_height=1.4,
-        h_fill = "#FFFFFF", h_color = "#000000", h_size=2,
+sticker(p, package="rcorex", p_size=10, p_y =1.1, p_color = "#000000",
+        s_x=1, s_y=1, s_width=1.6, s_height=1.6,
+        h_fill = "#FFFFFF", h_color = "#000000", h_size = 2,
         filename="man/figures/rcorexlogo.svg")
+
 

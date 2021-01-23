@@ -8,6 +8,7 @@
 #' @param dim_visible Integer. The dimension of the data - i.e. the number of discrete levels that exist in the data.
 #' @return A 3D array of marginals with dimensions: \code{(n_hidden, n_samples, dim_hidden)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
 #'
+#'@keywords internal
 #'
 calculate_p_xi_given_y <- function(x_i, thetai, marginal_description, dim_visible = NULL){
 

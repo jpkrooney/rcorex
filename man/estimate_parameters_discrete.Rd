@@ -29,3 +29,4 @@ Internal function to estimate parameters for data with discrete marginal descrip
 \details{
 Estimates the probability of each dim_visible occurring for each dim_hidden across each n_hidden.
 }
+\keyword{internal}

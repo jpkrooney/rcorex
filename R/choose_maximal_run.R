@@ -4,6 +4,7 @@
 #' @param repeats The number of repeat runs
 #' @param max_iter Numeric that specifies the maximum number of iterations the corex fits were run. Used in \emph{choose_maximal_run()} to detect non-converged runs.
 #' @return Returns the run with the highest TC of all converged runs. If no runs have converged, \emph{choose_maximal_run()} returns the run with maximal TC anyway - in such cases the results should not be interpreted, but may be useful for diagnostic purposes.
+#' @keywords internal
 #'
 choose_maximal_run <- function(repeat_results, repeats, max_iter){
     # Examine convergence of biocorex runs and select best run

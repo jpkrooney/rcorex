@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/jpkrooney/rcorex/branch/master/graph/badge.svg)](https://codecov.io/gh/jpkrooney/rcorex?branch=master)
 <!-- badges: end -->
 
-Total correlation explanation is method for discovering latent structure in high dimensional data. Total correlation explanation has been implemented in Python as CorEx and related modules (https://github.com/gregversteeg/CorEx). The initial aim of rcorex is to implement Total Correlation Explanation in the R statistical software, specifically to replicate the functionality of the Bio CorEx Python module ( https://github.com/gregversteeg/bio_corex ).
+Total correlation explanation is method for discovering latent structure in high dimensional data. Total correlation explanation has been implemented in Python as CorEx and related modules (https://github.com/gregversteeg/CorEx). The initial aim of rcorex is to implement Total Correlation Explanation in the R statistical software, specifically to replicate the functionality of the Bio CorEx Python module ( https://github.com/gregversteeg/bio_corex ) which is designed to  be sutiable for biomedical datasets.
 
 The theoretical framework behind the CorEx and Bio CorEx Python modules are laid out in the following academic papers:  
 1. [Discovering Structure in High-Dimensional Data Through Correlation Explanation](http://arxiv.org/abs/1406.1222)  
@@ -68,8 +68,8 @@ fit1$labels[, 2]
 ```
 
 
-## Hierarchical corex
-`rcorex` can also discovered hierarchical structure in data by using the labels output from an `rcorex` object as the input to the next layer in the hierarchy in the following example. Also note the use of the `repeats = 5` argument to `biocorex`. The acts to run biocorex not once, but 5 times and biocorex automatically selects the run which produces the maximal TC to return to the user (unless the `return_all_runs` argument is set to `TRUE`).
+## Hierarchical corex example
+`rcorex` can search for hierarchical structure in data by using the labels output from an `rcorex` object as the input to the next layer in the hierarchy in the following example. Also note the use of the `repeats = 5` argument to `biocorex`. The acts to run biocorex not once, but 5 times and biocorex automatically selects the run which produces the maximal TC to return to the user (unless the `return_all_runs` argument is set to `TRUE`).
 
 ```{r iris_example_layer1}
 library(rcorex)

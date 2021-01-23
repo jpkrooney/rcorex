@@ -1,4 +1,4 @@
-#' @title make_corex_tidygraph
+#' @title Make a tidygraph object from an rcorex object
 #' @description Function to created a tidygraph object from a fitted corex object or list of objects that represent hierarchical data structures
 #' @param corexes A single corex object, or a list of corex objects that should be each a layer of a hierarchy (see examples)
 #' @return Returns a tidygraph object that represent the learned structure in the supplied corex object or objects. In the tidygraph object edge thickness is proportional to mutual information and node size is represents mutual multivariate information among children

@@ -5,6 +5,7 @@
 #' @param marginal_description Character string which determines the marginal distribution of the data. single marginal description applies to all variables in biocorex
 #' @param ord Vector of integers that give desired reorder sequence
 #' @return Returns a new version of theta reordered according to the pattern supplied to \code{ord}
+#' @keywords internal
 #'
 reorder_theta <- function(theta, marginal_description, ord){
 

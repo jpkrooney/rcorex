@@ -1,5 +1,5 @@
-#' @title biocorex
-#' @description Port of Python biocorex function
+#' @title Fit biocorex to a dataset
+#' @description Function which implements the CorEx algorithm for data with features of typical biomedical data such as continuous variables, missing data and under-sampled data.
 #' @details
 #' This function is a port of the original biocorex function in Python by Greg Ver Steeg: \url{https://github.com/gregversteeg/bio_corex}.
 #' Reference: Greg Ver Steeg and Aram Galstyan. "Discovering Structure in High-Dimensional Data Through Correlation Explanation." NIPS, 2014. arXiv preprint arXiv:1406.1222.

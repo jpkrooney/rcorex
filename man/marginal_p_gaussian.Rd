@@ -20,3 +20,4 @@ Internal function to estimate the marginals for Gaussian distributed data.
 \details{
 Estimate the marginals for a single column of data \code{x_i} for each hidden variable with dimension dim_hidden. For continuous data we estimate \eqn{p\left(y_{j} \mid x_{i}\right) / p\left(y_{j}\right)} indirectly by using Bayes rule to rewrite this as \eqn{p\left(x_{i} \mid y_{j}\right) / p\left(x_{i}\right)}, which can be estimated.
 }
+\keyword{internal}

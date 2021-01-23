@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.rcorex.R
 \name{plot.rcorex}
 \alias{plot.rcorex}
-\title{plot.rcorex}
+\title{Plot TC vs number of iterations for an rcorex object}
 \usage{
 \method{plot}{rcorex}(x, ...)
 }

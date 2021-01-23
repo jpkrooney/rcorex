@@ -24,3 +24,4 @@ Internal function to calculate marginals for a single column of data given param
 \details{
 This function is an intermediate function with parent \code{\link{calculate_marginals_on_samples}} and child functions \code{\link{marginal_p_discrete}} and \code{\link{marginal_p_gaussian}}. It's main function is to call the appropriate child function depending on the value of the \code{marginal_description} variable.
 }
+\keyword{internal}

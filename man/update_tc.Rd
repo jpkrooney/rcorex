@@ -19,3 +19,4 @@ log_p_y. The log of the marginal probability of the latent variables.
 \description{
 Internal function to calculate marginal probility of latent variables
 }
+\keyword{internal}

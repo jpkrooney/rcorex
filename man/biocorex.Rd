@@ -2,7 +2,7 @@
 % Please edit documentation in R/biocorex.R
 \name{biocorex}
 \alias{biocorex}
-\title{biocorex}
+\title{Fit biocorex to a dataset}
 \usage{
 biocorex(
   data,
@@ -59,7 +59,7 @@ Returns either a rcorex object or a list of repeated runs as determined by the \
 }
 }
 \description{
-Port of Python biocorex function
+Function which implements the CorEx algorithm for data with features of typical biomedical data such as continuous variables, missing data and under-sampled data.
 }
 \details{
 This function is a port of the original biocorex function in Python by Greg Ver Steeg: \url{https://github.com/gregversteeg/bio_corex}.

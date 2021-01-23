@@ -73,3 +73,4 @@ Returns list of corex algorthim results sorted in descending order by TC of the 
 \description{
 Internal function to sort biocorex results for output to user.
 }
+\keyword{internal}

@@ -25,3 +25,4 @@ Returns an updated alpha matrix - an adjacency matrix between input variables an
 \description{
 Internal function to update alpha - the adjacency matrix that represents connections between input variables and hidden variables.
 }
+\keyword{internal}

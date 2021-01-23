@@ -7,6 +7,7 @@
 #' @param log_p_y A 2D matrix representing the log of the marginal probability of the latent variables.
 #' @param log_marg_x_4d A 4D array that contains the value of the marginal distribution for each variable, for each dimension of each hidden variable and for each data row.
 #' @return Returns an updated alpha matrix - an adjacency matrix between input variables and hidden variables.
+#' @keywords internal
 #'
 update_alpha <- function(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_4d){
 

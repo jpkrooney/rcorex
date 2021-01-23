@@ -4,6 +4,7 @@
 #' @param p_y_given_x_3d A 3D array of numerics in range (0, 1), that represent the probability that each observed x variable belongs to n_hidden latent variables of dimension dim_hidden. p_y_given_x_3d has dimensions (n_hidden, n_samples, dim_hidden).
 #' @param term Intermediate term calculated by parent function
 #' @return REturns bootstrapped estimates
+#' @keywords internal
 #'
 estimate_sig <- function(x_select, p_y_given_x_3d, term){
 

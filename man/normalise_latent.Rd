@@ -19,3 +19,4 @@ Returns a list called out which contains two elements:
 \description{
 Internal function to normalise the latent variable distribution
 }
+\keyword{internal}

@@ -22,3 +22,4 @@ Internal helper function to reorder the theta parameters list
 \details{
 This function is necessary as the structure of theta varies for each parameter type. THis function is used after convergence to help package results for return to user. Is it called by \code{\link{sort_results}} which passes the desired order via the \code{ord} parameter.
 }
+\keyword{internal}

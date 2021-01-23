@@ -9,6 +9,7 @@
 #' @param dim_visible The dimension of the data provided in data - i.e. the number of discrete levels that exist in the data. Must be positive integer.
 #' @return Returns a list of estimated parameters. The list has length = number of columns in the supplied \code{data}. The elements of the returned list depend on the marginal_description as follows: \itemize{ \item If the marginal description is "gaussian" a list of 2 arrays the first of which represent the estimate means, the second the estimated standard deviations. Each of these lists will have dimensions (n_hidden, dim_hidden).\item If the marginal description is "discrete", each element contains a list of length...}
 #'
+#' @keywords internal
 #'
 calculate_theta <- function(data, p_y_given_x_3d, marginal_description,
                             smooth_marginals, dim_visible = NULL){

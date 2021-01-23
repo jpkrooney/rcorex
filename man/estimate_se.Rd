@@ -21,3 +21,4 @@ Returns a list of 4 numerics names m1, m2, se1, se2 which are used in smoothing 
 \description{
 Internal Function to calculate bootstrap estimate of mean and standard error of gaussian parameters
 }
+\keyword{internal}

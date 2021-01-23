@@ -32,3 +32,4 @@ Internal function to calculate marginals given data and parameter estimates
 \details{
 Calculate the value of the marginal distribution for each variable, for each dimension of each hidden variable and each sample
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ REturns bootstrapped estimates
 \description{
 Internal Function to calculate bootstrap estimate of mean and standard error of gaussian parameters
 }
+\keyword{internal}

@@ -3,6 +3,7 @@
 #' @param tcs The total correlation explained by each latent variable in unit of nats (natural unit of information)
 #' @param tc_history A log of the estimated total correlation with each iteration of the algorithm.
 #' @return log_p_y. The log of the marginal probability of the latent variables.
+#' @keywords internal
 #'
 update_tc <- function(log_z, tcs, tc_history){
 

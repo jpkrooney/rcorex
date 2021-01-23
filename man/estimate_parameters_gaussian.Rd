@@ -19,3 +19,4 @@ Returns a list of 2 matrices each of dimension (n_hidden, dim_hidden). The first
 \description{
 Internal function to estimate parameters for data with gaussian marginal description
 }
+\keyword{internal}

@@ -1,4 +1,4 @@
-#' @title plot.rcorex
+#' @title Plot TC vs number of iterations for an rcorex object
 #' @description Function to plot corex TC per hidden factor vs iterations. Visualises algorithm convergence.
 #' @param x A fit corex model object
 #' @param ... Not used

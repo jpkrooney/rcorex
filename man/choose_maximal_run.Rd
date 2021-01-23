@@ -19,3 +19,4 @@ Returns the run with the highest TC of all converged runs. If no runs have conve
 \description{
 Internal function to select the optimal corex run when biocroex is run with repeats > 1
 }
+\keyword{internal}

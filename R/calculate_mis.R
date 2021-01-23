@@ -8,6 +8,7 @@
 #' @param log_p_y A 2D matrix representing the log of the marginal probability of the latent variables.
 #' @return Returns an array of normalised mutual information with number of columns = n_visible and number of rows = n_hidden.
 #'
+#'@keywords internal
 #'
 calculate_mis <- function(data, theta, marginal_description, log_p_y, p_y_given_x_3d, dim_visible ){
 

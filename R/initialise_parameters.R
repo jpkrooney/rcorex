@@ -13,6 +13,7 @@
 #'  \item{p_y_given_x_3d is a 3D array of numerics in range (0, 1), that represent the probability that each observed x variable belongs to n_hidden latent variables of dimension dim_hidden. p_y_given_x_3d has dimensions (n_hidden, n_samples, dim_hidden).}
 #'  \item{log_z is a 2D matrix containing the pointwise estimate of total correlation explained by each latent variable for each sample - this is used to estimate overall total correlation.}
 #'  }
+#' @keywords internal
 #'
 initialise_parameters <- function(data, n_hidden, dim_hidden ){
     # Get input data dimensions

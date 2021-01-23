@@ -10,6 +10,8 @@
 #'
 #' @return 4D array of dimensions: \code{(n_hidden, n_samples, n_visible, dim_hidden )} where n_samples is the number of rows in the user provided data, and n_visible is the number of columns. Returned data is result fo the calculation \eqn{log \left( \frac{p\left(y_{j} \mid x_{i}\right)}{p\left(y_{j}\right)} \right))} for each j,sample,i,y_j
 #'
+#'@keywords internal
+#'
 calculate_marginals_on_samples <- function(data, theta, marginal_description, log_p_y, dim_visible=NULL){
     # Get data and parameter dimensions
     n_hidden <- dim(log_p_y)[1]

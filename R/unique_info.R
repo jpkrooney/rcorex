@@ -2,6 +2,7 @@
 #' @description Internal function
 #' @param correct Index of correct predictions of hidden variable assignment obtained by cross-referencing max_indexes of p_y_given_x_3d and max_indices of log_marg_x_4d for each possible dim_hidden. It indicates whether the estimate based on x_i for y_j is correct for sample l.
 #' @return Returns a vector of length n_hidden the represents an estimate of fraction of unique info in each n_hidden
+#' @keywords internal
 #'
 unique_info <- function(correct){
     n_hidden <- nrow(correct)

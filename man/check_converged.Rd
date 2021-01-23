@@ -17,3 +17,4 @@ Returns a boolean with TRUE signalling convergence and FALSE signalling no conve
 \description{
 Internal function to check CorEx convergence. For the first 10 iterations convergence is not checked. After this, the absolute mean difference between the 5 most recent estimations of TC, and the 5 iterations previous to that again is calculated. Convergence is considered achieved if the difference is less than the value of the eps variable.
 }
+\keyword{internal}

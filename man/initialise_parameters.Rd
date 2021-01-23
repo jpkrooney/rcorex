@@ -29,3 +29,4 @@ Internal function to initialise corex parameters
 \details{
 Given the main corex arguments (the data, n_hidden and dim_hidden) this function generates objects with the correct dimensions to initialise the corex algorithm. Random values for alpha are chosen from a random uniform bound between 0 and 1, while for the unnormalised p_y_given_x_3d random values are chosen from a dirichlet distribution before p_y_given_x_3d is then normalised - during this step initial values for log_z are also calculated.
 }
+\keyword{internal}

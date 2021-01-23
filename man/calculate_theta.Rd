@@ -32,3 +32,4 @@ Internal function to calculate parameters for each dimension of each hidden vari
 \details{
 This function is calls functions \code{\link{estimate_parameters_gaussian}} or \code{\link{estimate_parameters_discrete}} depending on the \code{marginal_description}.
 }
+\keyword{internal}

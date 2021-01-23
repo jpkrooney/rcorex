@@ -6,6 +6,7 @@
 #' @param reps numeric to specify number of bootstrap estimates to calculate. Default = 20
 #'
 #' @return Returns a list of 4 numerics names m1, m2, se1, se2 which are used in smoothing calculations by \code{\link{estimate_parameters_gaussian}}
+#' @keywords internal
 #'
 estimate_se <- function(x_i, p_y_given_x_3d, num_obs, reps = 20){
     # Get important data and parameter dimensions

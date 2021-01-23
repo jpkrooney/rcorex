@@ -6,6 +6,7 @@
 #' \item {A 3D array of numerics in range (0, 1), that represent the probability that each observed x variable belongs to n_hidden latent variables of dimension dim_hidden. p_y_given_x_3d has dimensions (n_hidden, n_samples, dim_hidden).}
 #' \item{A 2D matrix containing the pointwise estimate of total correlation explained by each latent variable for each sample.}
 #' }
+#' @keywords internal
 #'
 normalise_latent <- function(log_p_y_given_x_unnorm_3d){
 

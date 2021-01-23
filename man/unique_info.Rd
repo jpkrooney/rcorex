@@ -15,3 +15,4 @@ Returns a vector of length n_hidden the represents an estimate of fraction of un
 \description{
 Internal function
 }
+\keyword{internal}

@@ -17,7 +17,8 @@ implemented in Python as CorEx and related modules
 (<https://github.com/gregversteeg/CorEx>). The initial aim of rcorex is
 to implement Total Correlation Explanation in the R statistical
 software, specifically to replicate the functionality of the Bio CorEx
-Python module ( <https://github.com/gregversteeg/bio_corex> ).
+Python module ( <https://github.com/gregversteeg/bio_corex> ) which is
+designed to be sutiable for biomedical datasets.
 
 The theoretical framework behind the CorEx and Bio CorEx Python modules
 are laid out in the following academic papers:  
@@ -82,9 +83,9 @@ fit1$labels[, 2]
 #> [1] 0 1 0 1
 ```
 
-## Hierarchical corex
+## Hierarchical corex example
 
-`rcorex` can also discovered hierarchical structure in data by using the
+`rcorex` can search for hierarchical structure in data by using the
 labels output from an `rcorex` object as the input to the next layer in
 the hierarchy in the following example. Also note the use of the
 `repeats = 5` argument to `biocorex`. The acts to run biocorex not once,

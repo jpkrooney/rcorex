@@ -9,6 +9,7 @@
 #' @param smooth_marginals Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.
 #' @param n_permutes numeric to specify number of bootstrap estimates to calculate. Default = 20
 #' @return Returns a list
+#' @keywords internal
 #'
 mi_bootstrap <- function(data, marginal_description, theta, log_p_y, p_y_given_x_3d, dim_visible,
                          smooth_marginals, n_permutes=20){

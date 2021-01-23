@@ -38,3 +38,4 @@ Returns a list
 \description{
 Internal function to calculate bias and sd of MIS via bootstrap
 }
+\keyword{internal}

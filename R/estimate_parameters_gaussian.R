@@ -5,6 +5,7 @@
 #' @param smooth_marginals Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used as described in \strong{Pepke, S., Ver Steeg, G. Comprehensive discovery of subsample gene expression components by information explanation: therapeutic implications in cancer. BMC Med Genomics 10, 12 (2017).} \url{https://doi.org/10.1186/s12920-017-0245-6}
 #' @importFrom stats sd
 #' @return Returns a list of 2 matrices each of dimension (n_hidden, dim_hidden). The first matrix represents estimated means for n_hidden x dim_hidden parameters, while the second matrix represents corresponding standard deviations.
+#' @keywords internal
 #'
 estimate_parameters_gaussian <- function(x_i, p_y_given_x_3d, smooth_marginals){
 

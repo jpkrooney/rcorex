@@ -32,3 +32,4 @@ Returns an array of normalised mutual information with number of columns = n_vis
 \description{
 Internal function to calculate the mutual information between each known variable and latent variable(s).
 }
+\keyword{internal}
