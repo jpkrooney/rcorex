@@ -25,7 +25,7 @@ p <- ggraph(g1, layout = "kk") +
 p <- p + theme_void() + theme_transparent()
 
 #Generate sticker
-sticker(p, package="rcorex", p_size=10, p_y =1.1, p_color = "#000000",
+sticker(p, package="rcorex", p_size=12, p_y =1.1, p_color = "#000000",
         s_x=1, s_y=1, s_width=1.6, s_height=1.6,
         h_fill = "#FFFFFF", h_color = "#000000", h_size = 2,
         filename="man/figures/rcorexlogo.svg")
