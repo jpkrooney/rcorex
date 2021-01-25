@@ -1,15 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rcorex <img src='man/figures/rcorexlogo.svg' align="right" height="139" />
-
-<!-- badges: start -->
-
-[![R build
-status](https://github.com/jpkrooney/rcorex/workflows/R-CMD-check/badge.svg)](https://github.com/jpkrooney/rcorex/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/jpkrooney/rcorex/branch/master/graph/badge.svg)](https://codecov.io/gh/jpkrooney/rcorex?branch=master)
-<!-- badges: end -->
+# rcorex
 
 Total correlation explanation is method for discovering latent structure
 in high dimensional data. Total correlation explanation has been
@@ -18,7 +10,7 @@ implemented in Python as CorEx and related modules
 to implement Total Correlation Explanation in the R statistical
 software, specifically to replicate the functionality of the Bio CorEx
 Python module ( <https://github.com/gregversteeg/bio_corex> ) which is
-designed to be sutiable for biomedical datasets.
+designed to be suitable for biomedical datasets.
 
 The theoretical framework behind the CorEx and Bio CorEx Python modules
 are laid out in the following academic papers:  
@@ -116,23 +108,19 @@ layer1 <- biocorex(iris, 3, 2, marginal_description = "gaussian", repeats = 5)
 #>  Calculating repeat # 3
 #>  Calculating repeat # 4
 #>  Calculating repeat # 5
-#> 1 out of 5 repeat runs of biocorex converged.
+#> 5 out of 5 repeat runs of biocorex converged.
 #> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
 
-# make a network tidygraph of only one layer
-g1 <- make_corex_tidygraph( layer1 )
-
-# Plot network graph of single layer
-ggraph(g1, layout = "fr") +
-  geom_node_point(aes(size = node_size), show.legend = FALSE) +
-  geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
-  scale_edge_width(range = c(0.3, 3)) +
-  geom_node_text(aes(label = names), repel = TRUE) +
-  ggtitle("Single layer corex") +
-  theme_graph()
+# Examine layer1 labels
+head(layer1$labels)
+#>      [,1] [,2] [,3]
+#> [1,]    0    0    1
+#> [2,]    0    0    1
+#> [3,]    0    0    1
+#> [4,]    0    0    1
+#> [5,]    0    0    1
+#> [6,]    0    0    1
 ```
-
-<img src="man/figures/README-iris_example_layer1-1.png" width="100%" />
 
 We can then use the labels from `layer1` as the input for a second layer
 of corex to discover hierarchical structure. Note that the value used
@@ -140,7 +128,6 @@ for n\_hidden should be lower in the second layer than it was in the
 first.
 
 ``` r
-
 # fit second layer of corex
 layer2 <- biocorex(layer1$labels, 1,2, marginal_description = "discrete", repeats = 5)
 #>  Calculating repeat # 1
@@ -151,20 +138,13 @@ layer2 <- biocorex(layer1$labels, 1,2, marginal_description = "discrete", repeat
 #> 5 out of 5 repeat runs of biocorex converged.
 #> Returning biocorex with highest TC of all converged runs - unconverged runs will not be included in comparison of runs.
 
-
-
-# make a network tidygraph of hierarchical layers
-g_hier <- make_corex_tidygraph( list(layer1, layer2))
-
-
-# Plot network graph of hierarchical layers
-ggraph(g_hier, layout = "fr") +
-  geom_node_point(aes(size = node_size), show.legend = FALSE) +
-  geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
-  scale_edge_width(range = c(0.3, 3)) +
-  geom_node_text(aes(label = names), repel = TRUE) +
-  ggtitle("Hierarchical corex") +
-  theme_graph()
+# Examine layer1 labels
+head(layer2$labels)
+#>      [,1]
+#> [1,]    0
+#> [2,]    0
+#> [3,]    0
+#> [4,]    0
+#> [5,]    0
+#> [6,]    0
 ```
-
-<img src="man/figures/README-iris_example_layer2-1.png" width="100%" />
