@@ -25,7 +25,7 @@ update_alpha <- function(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_
     # make empty alpha of n_hidden by n_visible
     alpha = matrix(nrow = n_hidden, ncol = n_visible)
 
-    # get indexes of maximal values of log_marg_x_4d with respect to 4th dimesion
+    # get indexes of maximal values of log_marg_x_4d with respect to 4th dimension
     max_marg <- which_max_4D( log_marg_x_4d )
 
     # get indexes of maximal values of p_y_given_x_3d with respect to 3rd dimension
