@@ -8,6 +8,7 @@ calculate_mis(
   data,
   theta,
   marginal_description,
+  minmarg,
   log_p_y,
   p_y_given_x_3d,
   dim_visible

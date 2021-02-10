@@ -11,7 +11,8 @@
 #' @return Returns a list
 #' @keywords internal
 #'
-mi_bootstrap <- function(data, marginal_description, theta, log_p_y, p_y_given_x_3d, dim_visible,
+mi_bootstrap <- function(data, marginal_description, minmarg, theta,
+                         log_p_y, p_y_given_x_3d, dim_visible,
                          smooth_marginals, n_permutes=20){
     # Extract key data parameters
     n_hidden <- dim(p_y_given_x_3d)[1]
@@ -25,7 +26,7 @@ mi_bootstrap <- function(data, marginal_description, theta, log_p_y, p_y_given_x
         p_y_given_x_3d <- p_y_given_x_3d[, samp, , drop = FALSE]
         temp_theta <- calculate_theta(data, p_y_given_x_3d, marginal_description,
                                           smooth_marginals, dim_visible )
-        mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, log_p_y,
+        mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, minmarg, log_p_y,
                                   p_y_given_x_3d, dim_visible )
     }
 

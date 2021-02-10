@@ -10,6 +10,7 @@ biocorex(
   dim_hidden = 2,
   marginal_description = "gaussian",
   smooth_marginals = FALSE,
+  minmarg = NULL,
   eps = 1e-06,
   verbose = FALSE,
   repeats = 1,
@@ -27,6 +28,8 @@ biocorex(
 \item{marginal_description}{Character string which determines the marginal distribution of the data. single marginal description applies to all variables in biocorex. Can be "gaussian" or "discrete". Default is "gaussian".}
 
 \item{smooth_marginals}{Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.}
+
+\item{minmarg}{EXPERIMENTAL If NULL has no effect. If not NULL should be a negative number that places a minimal value on individual log_marginal values. This is an alternative approach to imposing a minimum value on estimated standard deviations when using the gaussian marginal distribution, with the aim to prevent errors cause by dividing by zero which can occur in some circumstances}
 
 \item{eps}{The maximal change in TC across 10 iterations needed signal convergence}
 

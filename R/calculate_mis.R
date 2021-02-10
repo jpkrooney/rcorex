@@ -10,7 +10,8 @@
 #'
 #'@keywords internal
 #'
-calculate_mis <- function(data, theta, marginal_description, log_p_y, p_y_given_x_3d, dim_visible ){
+calculate_mis <- function(data, theta, marginal_description, minmarg, log_p_y,
+                          p_y_given_x_3d, dim_visible ){
 
     n_hidden <- dim(log_p_y)[1]
     dim_hidden <- dim(log_p_y)[2]
@@ -24,7 +25,7 @@ calculate_mis <- function(data, theta, marginal_description, log_p_y, p_y_given_
 
     # Calculate marginals
     log_marg_x_4d <- calculate_marginals_on_samples(data[samp,], theta, marginal_description,
-                                                    log_p_y, dim_visible)
+                                                    minmarg, log_p_y, dim_visible)
 
     #####
     # This section performs equivalent calculation to

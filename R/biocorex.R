@@ -8,6 +8,7 @@
 #' @param dim_hidden Each hidden unit can take \code{dim_hidden} discrete values. Default = 2
 #' @param marginal_description Character string which determines the marginal distribution of the data. single marginal description applies to all variables in biocorex. Can be "gaussian" or "discrete". Default is "gaussian".
 #' @param smooth_marginals Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.
+#' @param minmarg EXPERIMENTAL If NULL has no effect. If not NULL should be a negative number that places a minimal value on individual log_marginal values. This is an alternative approach to imposing a minimum value on estimated standard deviations when using the gaussian marginal distribution, with the aim to prevent errors cause by dividing by zero which can occur in some circumstances
 #' @param eps The maximal change in TC across 10 iterations needed signal convergence
 #' @param verbose Default FALSE. If TRUE, biocorex feeds back to user the iteration count and TCS each iteration. Useful to see progression if fitting a larger dataset.
 #' @param repeats How many times to run biocorex on the data using random initial values. Corex will return the run which leads to the maximum TC. Default is 1. For a new dataset, recommend to leave it as 1 to see how long biocorex takes, however for more trustworthy results a higher numbers recommended (e.g. 25).
@@ -38,8 +39,8 @@
 #'
 #'
 biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = "gaussian",
-                     smooth_marginals = FALSE, eps = 1e-6, verbose = FALSE,
-                     repeats = 1, return_all_runs = FALSE, max_iter = 100){
+                     smooth_marginals = FALSE, minmarg = NULL, eps = 1e-6, verbose = FALSE,
+                     repeats = 1, return_all_runs = FALSE, max_iter = 100 ){
 
     # Capture arguments for return to user in rcorex object
     cl <- match.call()
@@ -103,7 +104,7 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
             theta <- calculate_theta(data, p_y_given_x_3d, marginal_description,
                                      smooth_marginals, dim_visible)
             log_marg_x_4d <- calculate_marginals_on_samples(data, theta, marginal_description,
-                                                                log_p_y, dim_visible)
+                                                                minmarg, log_p_y,  dim_visible)
 
             # Structure learning step
             if (n_hidden > 1){
@@ -127,9 +128,10 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
         }
 
         # Package results for return to user
-        results <- sort_results(data, cl, n_hidden, dim_visible, marginal_description, smooth_marginals,
-                                tcs, alpha, p_y_given_x_3d, theta,
-                                log_p_y, log_z, tc_history, names)
+        results <- sort_results(data, cl, n_hidden, dim_visible, marginal_description,
+                                smooth_marginals, minmarg, tcs, alpha, p_y_given_x_3d,
+                                theta, log_p_y, log_z, tc_history, names)
+        #results$marg <- log_marg_x_4d
         return(results)
     })
 

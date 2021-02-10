@@ -7,6 +7,7 @@
 mi_bootstrap(
   data,
   marginal_description,
+  minmarg,
   theta,
   log_p_y,
   p_y_given_x_3d,

@@ -35,7 +35,7 @@
 #' }
 #'
 sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, smooth_marginals,
-                         tcs, alpha, p_y_given_x_3d, theta,
+                         minmarg, tcs, alpha, p_y_given_x_3d, theta,
                          log_p_y, log_z, tc_history, names){
 
     # Order components from strongest TC to weakest
@@ -58,14 +58,19 @@ sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, 
                      )
 
     # Add mutual information (mis) to results
-    results$mis <- calculate_mis(data, results$theta, marginal_description, results$log_p_y,
-                        results$p_y_given_x, dim_visible )
+    results$mis <- calculate_mis(data = data, theta = results$theta,
+                                 marginal_description = marginal_description,
+                                 minmarg = minmarg,
+                                 log_p_y = results$log_p_y,
+                                 p_y_given_x_3d = results$p_y_given_x,
+                                 dim_visible = dim_visible )
 
     # Adjust shape of alpha if n_hidden ==1
     if(n_hidden==1){ results$alpha <- t(matrix(results$alpha)) }
 
     # Apply bootstrap of mis - moved here from biocorex() to avoid running this on discarded answers
-    boot_res <- mi_bootstrap(data, marginal_description, results$theta, results$log_p_y, results$p_y_given_x,
+    boot_res <- mi_bootstrap(data, marginal_description, minmarg,
+                             results$theta, results$log_p_y, results$p_y_given_x,
                              dim_visible, smooth_marginals)
     results$mis <- (results$mis - boot_res$bias) * (results$mis > boot_res$sig)
 

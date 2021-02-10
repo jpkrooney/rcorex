@@ -56,8 +56,12 @@ which_max_4D <- function(x) {
     res1 <- array(integer(1), dim = slice)
     num <- prod(slice)
     span <- seq_len( dim(x)[4] ) * num - num
-    for(i in seq_len(num))
-        res1[i] <- which.max(x[i + span])
+    for(i in seq_len(num)){
+        res1[i] <- which.max(x[i + span]) # bug if all infinite
+        #res <- which.max(x[i + span])
+        #res1[i] <- if( length(res) == 0 ) { 1 }
+        #                else { res } # if x[i + span] are all infinite choose entry 1
+    }
     return(res1)
 }
 
