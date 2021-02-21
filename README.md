@@ -3,6 +3,14 @@
 
 # rcorex
 
+<!-- badges: start -->
+
+[![R build
+status](https://github.com/jpkrooney/rcorex/workflows/R-CMD-check/badge.svg)](https://github.com/jpkrooney/rcorex/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/jpkrooney/rcorex/branch/master/graph/badge.svg)](https://codecov.io/gh/jpkrooney/rcorex?branch=master)
+<!-- badges: end -->
+
 Total correlation explanation is method for discovering latent structure
 in high dimensional data. Total correlation explanation has been
 implemented in Python as CorEx and related modules

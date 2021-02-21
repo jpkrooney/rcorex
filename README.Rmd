@@ -15,6 +15,12 @@ knitr::opts_chunk$set(
 
 # rcorex 
 
+<!-- badges: start -->
+[![R build status](https://github.com/jpkrooney/rcorex/workflows/R-CMD-check/badge.svg)](https://github.com/jpkrooney/rcorex/actions)
+[![Codecov test coverage](https://codecov.io/gh/jpkrooney/rcorex/branch/master/graph/badge.svg)](https://codecov.io/gh/jpkrooney/rcorex?branch=master)
+<!-- badges: end -->
+
+
 Total correlation explanation is method for discovering latent structure in high dimensional data. Total correlation explanation has been implemented in Python as CorEx and related modules (https://github.com/gregversteeg/CorEx). The initial aim of rcorex is to implement Total Correlation Explanation in the R statistical software, specifically to replicate the functionality of the Bio CorEx Python module ( https://github.com/gregversteeg/bio_corex ) which is designed to  be suitable for biomedical datasets. This is implemented in the `biocorex()` command. The `epicorex()` command extends the functionality beyond that of the Python implementation and allows the use of data with mixed data types.
 
 The theoretical framework behind the CorEx and Bio CorEx Python modules are laid out in the following academic papers:  
