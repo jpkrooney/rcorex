@@ -44,8 +44,8 @@ remotes::install_github("jpkrooney/rcorex")
 ## Minimal example
 
 To fit a CorEx model in rcorex we can use the `biocorex()` command.
-Biocorex accepts a data.frame or a matrix as input, however as with the
-Python implementation of Bio CorEx, all variables must have the same
+`biocorex()` accepts a data.frame or a matrix as input, however as with
+the Python implementation of Bio CorEx, all variables must have the same
 data-type and currently only “discrete” or “gaussian” data are allowed
 as marginal descriptions, which apply to all columns.
 
