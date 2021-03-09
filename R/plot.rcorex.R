@@ -25,6 +25,6 @@ plot.rcorex <- function(x, ...) {
     g <- ggplot(data = subset(df1, cluster != "Total"), aes(x=iters, y = tcs, col=cluster)) +
         geom_line() + xlab("iterations") + ylab("TC") +
         geom_line(data = subset(df1, cluster == "Total"), colour="black", size=2) +
-        theme_minimal() + ggtitle("Corex fit convergence")
+        theme_minimal() + ggtitle("Corex model TC vs iterations:")
     return(g)
 }
