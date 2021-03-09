@@ -10,7 +10,8 @@ check_converged <- function(tc_history, eps){
     if (len < 10){
         return(FALSE)
     } else {
-        dist = -mean(unlist(tc_history[(len-10):(len-5)])) + mean(unlist(tc_history[(len-5):len]))
+        dist = -mean( unlist( lapply(tc_history[(len-10):(len-5)], sum) ) ) +
+            mean( unlist( lapply(tc_history[(len-5):len], sum) ) )
         return(abs(dist) < eps)
     }
 }
