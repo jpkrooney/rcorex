@@ -1,3 +1,6 @@
+# rcorex 0.2.1
+ * Fixed bug in `check_converged` function. The TCs for eah hidden node should have been summed at each iteration before checking convergence and they were not. This is fixed now which improves detection of convergence.
+ 
 # rcorex 0.2.0
 
 * Removed `sig_ml` minimal value in `estimate_parameters_gaussian()` function
