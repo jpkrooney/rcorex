@@ -38,7 +38,7 @@
 #'
 #'
 epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
-                     smooth_marginals = FALSE, minmarg = NULL, eps = 1e-6, verbose = FALSE,
+                     smooth_marginals = FALSE, minmarg = -10, eps = 1e-6, verbose = FALSE,
                      repeats = 1, return_all_runs = FALSE, max_iter = 100){
 
     # Capture arguments for return to user in rcorex object
