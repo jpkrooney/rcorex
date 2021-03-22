@@ -54,7 +54,7 @@ estimate_parameters_bernoulli <- function(x_i, p_y_given_x_3d, smooth_marginals)
         # Check for and replace any infinities
         lam[ is.infinite(lam) ] <- 0.5
 
-        for (i in 1:dim_visible){
+        for (i in 1:2){
             p[i, , ] <- (1 - lam)*prior[i] +lam * p[i, , ]
         }
     }

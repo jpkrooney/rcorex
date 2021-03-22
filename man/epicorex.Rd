@@ -10,7 +10,7 @@ epicorex(
   dim_hidden = 2,
   marginal_description,
   smooth_marginals = FALSE,
-  minmarg = NULL,
+  minmarg = -10,
   eps = 1e-06,
   verbose = FALSE,
   repeats = 1,

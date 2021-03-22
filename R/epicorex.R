@@ -129,7 +129,7 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
 
         # Package results for return to user
         # mis <- calculate_mis(data, theta, marginal_description, p_y_given_x_3d, dim_visible)
-        results <- sort_results(data, cl, n_hidden, dim_visible, marginal_description,
+        results <- sort_results(data, cl, n_hidden, dim_visible = NULL, marginal_description,
                                 smooth_marginals, minmarg, tcs, alpha, p_y_given_x_3d,
                                 theta, log_p_y, log_z, tc_history, names)
         return(results)
