@@ -7,7 +7,7 @@
 #' @param thetai Estimated parameters corresponding to the single variable/column of data provided to x_i
 #' @param dim_visible The dimension of the variable provided in x_i - i.e. the number of discrete levels
 #'
-#' @return A three dimensional array of marginals with dimensions: \code{(n_hidden, n_samples, dim_hidden)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
+#' @return A three dimensional array of marginals with dimensions: \code{(n_hidden, dim_hidden, n_samples)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
 #' @keywords internal
 #'
 marginal_p_discrete <- function(x_i, thetai, dim_visible) {
@@ -20,14 +20,12 @@ marginal_p_discrete <- function(x_i, thetai, dim_visible) {
     logp <- lapply(1: dim_visible, function(i) thetai[i, , ])
 
     # Make empty array to hold result
-    z <- array( dim = c(length(x_i), n_hidden, dim_hidden))
-
+    z <- array( dim = c( n_hidden, dim_hidden, length(x_i)))
     # Calculate marginal directly
     for(i in 1:length( x_i[ not_missing ] ) ) {
-        z[i, , ] <- logp[[ x_i[ not_missing ] [i] + 1] ]
+        z[ , , i] <- logp[[ x_i[ not_missing ] [i] + 1] ]
     }
     z[ is.na(z) ] <- 0
-    z <- aperm(z, c( 2, 1, 3))
 
     return(z)
 }

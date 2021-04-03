@@ -33,16 +33,17 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
     }
 
     # Pack results into 4D array
+    #log_marg_x_4d <- array( unlist( calcs_results ),
+    #                  dim = c(n_hidden, n_samples, dim_hidden, n_visible) )
+    #log_marg_x_4d <- aperm(log_marg_x_4d, c(1, 2, 4, 3))
     log_marg_x_4d <- array( unlist( calcs_results ),
-                      dim = c(n_hidden, n_samples, dim_hidden, n_visible) )
-    log_marg_x_4d <- aperm(log_marg_x_4d, c(1, 2, 4, 3))
+                            dim = c(n_hidden, dim_hidden, n_samples, n_visible) )
+    log_marg_x_4d <- aperm(log_marg_x_4d, c(1, 3, 4, 2))
 
     # to add and subtract with log_p_y need to broadcast in permuted form across extra dimensions
-    log_p_y_4d <- array( dim = dim(log_marg_x_4d))
-    temp3d <- aperm( replicate(n_samples, log_p_y), c(1, 3, 2))
-    for(k in 1: n_visible){
-        log_p_y_4d [ , , k, ] <- temp3d
-    }
+    log_p_y_4d <- aperm( array( rep(log_p_y, n_samples * n_visible),
+                                dim = c( dim(log_p_y), n_visible,  n_samples)),
+                         c(1, 4, 3, 2))
 
     # Now add 4D form of log_p_y to log marginals
     log_marg_x_4d <- log_marg_x_4d + log_p_y_4d
@@ -69,7 +70,7 @@ logSumExp4D <- function (data) {
     dims <- dim(data)[1:3]
     dropdim <- dim(data)[4]
     len_res <- prod( dims )   # length of results object
-    dim( data ) <- c( len_res, dropdim ) # reshape data from 4D to 3D
+    dim( data ) <- c( len_res, dropdim ) # reshape data from 4D to 2D
     rmaxs <- rowMaxs(data) # get max of each row
     res <- rmaxs + log(rowSums( exp( (data) - rmaxs ) ) ) # perform logsumexp calc
     res <- array(res, dim = dims) #reshape for returning to calling function

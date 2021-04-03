@@ -6,7 +6,7 @@
 #' @param x_i A single variable/column of data
 #' @param thetai Estimated parameters corresponding to the single variable/column of data provided to x_i
 #'
-#' @return A three dimensional array of marginals with dimensions: \code{(n_hidden, n_samples, dim_hidden)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
+#' @return A three dimensional array of marginals with dimensions: \code{(n_hidden, dim_hidden, n_samples)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
 #' @keywords internal
 #'
 marginal_p_gaussian <- function(x_i, thetai) {
@@ -23,11 +23,11 @@ marginal_p_gaussian <- function(x_i, thetai) {
     subtract_term <- 0.5 * log(2 * pi * sig)
 
     # Calculate marginals using parameters and formula for Gaussian distribution
-    z <- -(x_i - rep(mu, each=n_samp))^2
+    z <- -( rep(x_i, each = n_hidden*dim_hidden) - c((mu)) )^2
     z[is.na(z)] <- 0
-    dim(z) <- c(n_samp, n_hidden, dim_hidden)
-    z <- aperm(z, c(2, 3, 1))
     z <- (z / c(2*sig)) - c(subtract_term)
-    z <- aperm(z, c(1, 3, 2))
+    # package into 3D array for return
+    dim(z) <- c(n_hidden, dim_hidden, n_samp)
+    #z <- aperm(z, c(1, 3, 2))
     return(z)
 }

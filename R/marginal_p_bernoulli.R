@@ -18,14 +18,13 @@ marginal_p_bernoulli <- function(x_i, thetai) {
     logp <- lapply(1: 2, function(i) thetai[i, , ])
 
     # Make empty array to hold result
-    z <- array( dim = c(length(x_i), n_hidden, dim_hidden))
+    z <- array( dim = c(n_hidden, dim_hidden, length(x_i)))
 
     # Calculate marginal directly
     for(i in 1:length( x_i[ not_missing ] ) ) {
-        z[i, , ] <- logp[[ x_i[ not_missing ] [i] + 1] ]
+        z[ , , i] <- logp[[ x_i[ not_missing ] [i] + 1] ]
     }
     z[ is.na(z) ] <- 0
-    z <- aperm(z, c( 2, 1, 3))
 
     return(z)
 }
