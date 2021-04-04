@@ -54,13 +54,11 @@ update_alpha <- function(data, p_y_given_x_3d, tcs, tc_min, log_p_y, log_marg_x_
 which_max_4D <- function(x) {
     slice <- dim(x)[1:3]
     res1 <- array(integer(1), dim = slice)
-    num <- prod(slice)
+    #num <- prod(slice)
+    num <- length(x[,,,1])
     span <- seq_len( dim(x)[4] ) * num - num
     for(i in seq_len(num)){
-        res1[i] <- which.max(x[i + span]) # bug if all infinite
-        #res <- which.max(x[i + span])
-        #res1[i] <- if( length(res) == 0 ) { 1 }
-        #                else { res } # if x[i + span] are all infinite choose entry 1
+        res1[i] <- which.max(x[i + span])
     }
     return(res1)
 }
@@ -68,7 +66,8 @@ which_max_4D <- function(x) {
 which_max_3D <- function(x) {
     slice <- dim(x)[1:2]
     res1 <- array(integer(1), dim = slice)
-    num <- prod(slice)
+    #num <- prod(slice)
+    num <- length(x[,,1])
     span <- seq_len( dim(x)[3] ) * num - num
     for(i in seq_len(num))
         res1[i] <- which.max(x[i + span])
