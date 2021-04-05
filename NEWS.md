@@ -1,5 +1,8 @@
+# rcorex 0.2.2
+* Implemented minor code tweaks to speed up calculating the marginals
+
 # rcorex 0.2.1
- * Fixed bug in `check_converged` function. The TCs for each hidden node should have been summed at each iteration before checking convergence and they were not. This is fixed now which improves detection of convergence.
+* Fixed bug in `check_converged` function. The TCs for each hidden node should have been summed at each iteration before checking convergence and they were not. This is fixed now which improves detection of convergence.
  
 # rcorex 0.2.0
 
