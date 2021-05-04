@@ -8,7 +8,6 @@ calculate_marginals_on_samples(
   data,
   theta,
   marginal_description,
-  minmarg = NULL,
   log_p_y,
   dim_visible = NULL
 )
@@ -19,8 +18,6 @@ calculate_marginals_on_samples(
 \item{theta}{List of estimated parameters}
 
 \item{marginal_description}{Character string which determines the marginal distribution of the data. A single marginal description applies to all variables in biocorex.}
-
-\item{minmarg}{EXPERIMENTAL parameter. If NULL has no effect. If not NULL should be a negative number that places a minimal value on the log_marginal value.}
 
 \item{log_p_y}{A 2D matrix representing the log of the marginal probability of the latent variables}
 

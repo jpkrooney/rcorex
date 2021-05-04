@@ -1,7 +1,7 @@
 Package: rcorex
 Type: Package
 Title: An Implementation of Total Correlation Explanation
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: person("James", "Rooney", email = "jrooney@rcsi.ie",
                   role = c("aut", "cre"))
 Maintainer: The package maintainer <jrooney@rcsi.ie>
@@ -15,7 +15,6 @@ RoxygenNote: 7.1.1
 Imports: 
     magrittr (>= 1.5),
     matrixStats (>= 0.55.0),
-    tensor (>= 1.5),
     gtools (>= 3.8.2),
     stats,
     tidygraph (>= 1.2.0),

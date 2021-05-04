@@ -20,11 +20,22 @@ estimate_parameters_discrete <- function(x_i, p_y_given_x_3d, smooth_marginals, 
     x_select <- matrix( rep(x_i, each=dim_visible) == reference, nrow = dim_visible)
 
     # matrix multiplication of x_select by p_y_given_x_3d
-    counts <- tensor(x_select, p_y_given_x_3d, alongA = 2, alongB=2) # dim_v, n_hid, dim_hid
+    #counts <- tensor(x_select, p_y_given_x_3d, alongA = 2, alongB=2) # dim_v, n_hid, dim_hid
+    perm_p <- aperm(p_y_given_x_3d, c(2, 1, 3))
+    dims_p <- dim(perm_p)
+    dim(perm_p) <- c(dims_p[1], prod(dims_p[2:3]))
+    counts <- x_select %*% perm_p
+    dim(counts) <- c(dim_visible, n_hid, n_dimhid)
 
     # Add tiny smoothing to avoid numerical errors and make a copy
-    p <- counts + 0.001
-    denom <- apply(p, c(2,3), sum)
+    #p <- counts + 0.001
+    #denom <- apply(p, c(2,3), sum)
+    p2 <- p <- counts + 0.001
+    dim(p2) <- c(dim_visible, n_hid * n_dimhid)
+    ## calculate denominator by getting colSums of p2
+    denom <- matrix( colSums(p2), nrow=2)
+    dim(denom) <- c(n_hid, n_dimhid)
+
     p <- p / rep(denom, each = dim_visible)
 
     if (smooth_marginals == TRUE){

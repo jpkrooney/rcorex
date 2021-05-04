@@ -76,6 +76,25 @@ which_max_3D <- function(x) {
 
 
 
+# version which deals with infinities
+#which_max_4D <- function(x) {
+#    slice <- dim(x)[1:3]
+#    res1 <- array(integer(1), dim = slice)
+#    #num <- prod(slice)
+#    num <- length(x[,,,1])
+#    span <- seq_len( dim(x)[4] ) * num - num
+#    for(i in seq_len(num)){
+#        temp <- which.max(x[i + span])
+#        if( length(temp) ==0) {
+#            res1[i] <- sample(1:length(span), 1)
+#        } else {
+#            res1[i] <- temp
+#        }
+#    }
+#    return(res1)
+#}
+
+
 
 
 

@@ -10,7 +10,6 @@ epicorex(
   dim_hidden = 2,
   marginal_description,
   smooth_marginals = FALSE,
-  minmarg = -10,
   eps = 1e-06,
   verbose = FALSE,
   repeats = 1,
@@ -28,8 +27,6 @@ epicorex(
 \item{marginal_description}{Character string which determines the marginal distribution of the data.For epicorex, marginal_description must be a vector of strings of length equal to the number of columns in \code{data}. Allowable marginal descriptions are: gaussian, discrete, bernoulii currently - more may be added later.}
 
 \item{smooth_marginals}{Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.}
-
-\item{minmarg}{EXPERIMENTAL If NULL has no effect. If not NULL should be a negative number that places a minimal value on individual log_marginal values. This is an alternative approach to imposing a minimum value on estimated standard deviations when using the gaussian marginal distribution, with the aim to prevent errors cause by dividing by zero which can occur in some circumstances}
 
 \item{eps}{The maximal change in TC across 10 iterations needed signal convergence}
 

@@ -14,7 +14,7 @@ marginal_p_discrete(x_i, thetai, dim_visible)
 \item{dim_visible}{The dimension of the variable provided in x_i - i.e. the number of discrete levels}
 }
 \value{
-A three dimensional array of marginals with dimensions: \code{(n_hidden, n_samples, dim_hidden)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
+A three dimensional array of marginals with dimensions: \code{(n_hidden, dim_hidden, n_samples)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
 }
 \description{
 Internal function to estimate the marginals for discrete data.

@@ -12,7 +12,7 @@ marginal_p_gaussian(x_i, thetai)
 \item{thetai}{Estimated parameters corresponding to the single variable/column of data provided to x_i}
 }
 \value{
-A three dimensional array of marginals with dimensions: \code{(n_hidden, n_samples, dim_hidden)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
+A three dimensional array of marginals with dimensions: \code{(n_hidden, dim_hidden, n_samples)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
 }
 \description{
 Internal function to estimate the marginals for Gaussian distributed data.
