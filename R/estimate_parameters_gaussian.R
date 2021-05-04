@@ -37,7 +37,7 @@ estimate_parameters_gaussian <- function(x_i, p_y_given_x_3d, smooth_marginals){
     denominator[denominator < 0.01] <- 0.01     # min value 0.01 to avoid divide by zero
 
     sig_ml <- colSums(aperm(term2, c(2, 1, 3))) / denominator
-    sig_ml[sig_ml < .Machine$double.xmin] <- .Machine$double.xmin # min value to avoid divide by zero
+    sig_ml[sig_ml < 1e-200] <- 1e-200 # min value to avoid divide by zero
 
     ##### add option for smooth marginals later
     if (smooth_marginals == TRUE){
