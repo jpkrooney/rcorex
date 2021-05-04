@@ -11,7 +11,6 @@ sort_results(
   dim_visible,
   marginal_description,
   smooth_marginals,
-  minmarg,
   tcs,
   alpha,
   p_y_given_x_3d,

@@ -1,5 +1,10 @@
+# rcorex 0.2.3
+* Removed `minmarg` as argument from `biocorex()` and `epicorex()`
+* Restored `sig_ml` minimal value to the `estimate_parameters_gaussian()` function to prevent divide by zero errors in the `marginal_p_gaussian()` function. However, now the minimal value is instead set to the machine floating point minimum value. As a result, `biocorex()` may sometimes produce negative `tcs`. This is an indication that the data is non-gaussian and such results should not be trusted. This can easily occur, for example, when binary data is fit with a gaussian marginal description.
+* Minor code optimization to speed up calculating the discrete and bernoulli
+
 # rcorex 0.2.2
-* Implemented minor code tweaks to speed up calculating the marginals
+* Minor code optimization to speed up calculating the gaussian marginals
 
 # rcorex 0.2.1
 * Fixed bug in `check_converged` function. The TCs for each hidden node should have been summed at each iteration before checking convergence and they were not. This is fixed now which improves detection of convergence.

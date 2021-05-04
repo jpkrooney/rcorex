@@ -29,5 +29,6 @@ marginal_p_gaussian <- function(x_i, thetai) {
     # package into 3D array for return
     dim(z) <- c(n_hidden, dim_hidden, n_samp)
     #z <- aperm(z, c(1, 3, 2))
+
     return(z)
 }

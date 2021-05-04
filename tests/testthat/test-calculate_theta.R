@@ -1,5 +1,3 @@
-library(withr)
-
 context("calculate_theta")
 test_that("estimate_marginals functions calculate expected result", {
 
