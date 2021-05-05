@@ -25,13 +25,15 @@ estimate_parameters_bernoulli <- function(x_i, p_y_given_x_3d, smooth_marginals)
     dim(counts) <- c(2, n_hid, n_dimhid) # 2, n_hid, dim_hid
 
     # Add tiny smoothing to avoid numerical errors and make a copy
-    #p <- counts + 0.001
-    #denom <- apply(p, c(2,3), sum)
-    p2 <- p <- counts + 0.001
-    dim(p2) <- c(2, n_hid * n_dimhid)
-    ## calculate denominator by getting colSums of p2
-    denom <- matrix( colSums(p2), nrow=2)
-    dim(denom) <- c(n_hid, n_dimhid)
+    p <- counts + 0.001
+    denom <- apply(p, c(2,3), sum)
+
+    # Note this speedup does not work when n_hid*n_dimhid is an odd number - i.e. 3x3= 9
+    #p2 <- p <- counts + 0.001
+    #dim(p2) <- c(2, n_hid * n_dimhid)
+    ### calculate denominator by getting colSums of p2
+    #denom <- matrix( colSums(p2), nrow=2)
+    #dim(denom) <- c(n_hid, n_dimhid)
 
     # divide p by denominator
     p <- p / rep(denom, each = 2)

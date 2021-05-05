@@ -28,13 +28,15 @@ estimate_parameters_discrete <- function(x_i, p_y_given_x_3d, smooth_marginals, 
     dim(counts) <- c(dim_visible, n_hid, n_dimhid)
 
     # Add tiny smoothing to avoid numerical errors and make a copy
-    #p <- counts + 0.001
-    #denom <- apply(p, c(2,3), sum)
-    p2 <- p <- counts + 0.001
-    dim(p2) <- c(dim_visible, n_hid * n_dimhid)
-    ## calculate denominator by getting colSums of p2
-    denom <- matrix( colSums(p2), nrow=2)
-    dim(denom) <- c(n_hid, n_dimhid)
+    p <- counts + 0.001
+    denom <- apply(p, c(2,3), sum)
+
+    # Note this speedup does not work when n_hid*n_dimhid is an odd number - i.e. 3x3= 9
+    #p2 <- p <- counts + 0.001
+    #dim(p2) <- c(dim_visible, n_hid * n_dimhid)
+    ### calculate denominator by getting colSums of p2
+    #denom <- matrix( colSums(p2), nrow=2)
+    #dim(denom) <- c(n_hid, n_dimhid)
 
     p <- p / rep(denom, each = dim_visible)
 
