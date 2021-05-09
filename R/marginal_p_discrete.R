@@ -14,17 +14,26 @@ marginal_p_discrete <- function(x_i, thetai, dim_visible) {
     # Get parameter dimensions from parameters object
     n_hidden <- dim(thetai)[2]
     dim_hidden <- dim(thetai)[3]
-    not_missing <- !is.na(x_i)
+    #not_missing <- !is.na(x_i)
 
     # Extract estimates of 1:dim_visible parameters
-    logp <- lapply(1: dim_visible, function(i) thetai[i, , ])
+    #logp <- lapply(1: dim_visible, function(i) thetai[i, , ])
 
     # Make empty array to hold result
-    z <- array( dim = c( n_hidden, dim_hidden, length(x_i)))
+    #z <- array( dim = c( n_hidden, dim_hidden, length(x_i)))
     # Calculate marginal directly
-    for(i in 1:length( x_i[ not_missing ] ) ) {
-        z[ , , i] <- logp[[ x_i[ not_missing ] [i] + 1] ]
-    }
+    #for(i in 1:length( x_i[ not_missing ] ) ) {
+    #    z[ , , i] <- logp[[ x_i[ not_missing ] [i] + 1] ]
+    #}
+
+    logp <- aperm(thetai, c(2, 3, 1))
+
+    # construct an index
+    sizeslice <- prod(n_hidden, dim_hidden)
+    idx <- 1:sizeslice + rep(x_i, each=sizeslice) *sizeslice
+
+    # assign to z
+    z <- array( logp[idx], dim = c( n_hidden, dim_hidden, length(x_i)))
     z[ is.na(z) ] <- 0
 
     return(z)
