@@ -30,7 +30,7 @@ marginal_p_discrete <- function(x_i, thetai, dim_visible) {
 
     # construct an index
     sizeslice <- prod(n_hidden, dim_hidden)
-    idx <- 1:sizeslice + rep(x_i, each=sizeslice) *sizeslice
+    idx <- seq_len(sizeslice) + rep(x_i, each=sizeslice) *sizeslice
 
     # assign to z
     z <- array( logp[idx], dim = c( n_hidden, dim_hidden, length(x_i)))
