@@ -11,8 +11,8 @@ choose_maximal_run <- function(repeat_results, repeats, max_iter){
     if ( repeats ==1 ){
         out <- repeat_results[[1]]
     } else {
-        repeat_iters <- unlist(lapply(repeat_results, '[[', "iterations"))
-        converged_repeats <- which( repeat_iters != max_iter )
+        states <- unlist(lapply(repeat_results, '[[', "state"))
+        converged_repeats <- which( states == "Converged" )
         message( paste0( length(converged_repeats), " out of ", repeats,
                        " repeat runs of biocorex converged."))
         if( length(converged_repeats > 0 ))

@@ -14,6 +14,7 @@
 #' @param log_z A 2D matrix containing the pointwise estimate of total correlation explained by each latent variable for each sample - this is used to estimate overall total correlation.
 #' @param tc_history A list that records the TC results for each iteration of the algorithm. Used to calculate if convergence has been reached.
 #' @param names A vector of the variables names of the supplied data.
+#' @param state A string that describes the final state of corex (i.e. "Converged", "Negative tcs", "Unconverged").
 #' @keywords internal
 #' @return Returns list of corex algorthim results sorted in descending order by TC of the latent variables. The list includes the following elements:
 #' \enumerate{
@@ -36,7 +37,7 @@
 #'
 sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, smooth_marginals,
                          tcs, alpha, p_y_given_x_3d, theta,
-                         log_p_y, log_z, tc_history, names){
+                         log_p_y, log_z, tc_history, names, state){
 
     # Order components from strongest TC to weakest
     ord <- order(tcs, decreasing=TRUE)
@@ -60,8 +61,8 @@ sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, 
                      } else { NULL },
                      iterations = length(tc_history),
                      tc_history = tc_history,
-                     marginal_description = marginal_description
-                     )
+                     marginal_description = marginal_description,
+                     state = state)
 
     # Add mutual information (mis) to results
     results$mis <- calculate_mis(data = data, theta = results$theta,

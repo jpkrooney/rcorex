@@ -12,6 +12,8 @@
 #' @param repeats How many times to run epicorex on the data using random initial values. Corex will return the run which leads to the maximum TC. Default is 1. For a new dataset, recommend to leave it as 1 to see how long epicorex takes, however for more trustworthy results a higher numbers recommended (e.g. 25).
 #' @param return_all_runs Default FALSE. If FALSE epicorex returns a single object of class rcorex. If TRUE epicorex returns all runs of epicorex as a list - the length of which = \code{repeats}. In this case the returned results are not rcorex objects, but have the same components of an rcorex object with class list.
 #' @param max_iter numeric. Maximum number of iterations before ending. Default = 100
+#' @param negcheck_iter numeric. Number of iterations at which to check for persistent negative total tcs. IF detected the corex run stops. The default is 30.
+#' @param neg_limit numeric. At the negcheck_iter number of iterations, all prior iterations are checked versus this value. If all values are below this value, persistent negative tcs is declared. This is an indication that some data is not well described by the marginal description used. The default is -1.
 #' @return Returns either a rcorex object or a list of repeated runs as determined by the \code{return_all_runs} argument. An rcorex object is a list that contains the following components:
 #' #' \enumerate{
 #' \item{data - the user data supplied in call to corex.}
@@ -38,7 +40,8 @@
 #'
 epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
                      smooth_marginals = FALSE, eps = 1e-6, verbose = FALSE,
-                     repeats = 1, return_all_runs = FALSE, max_iter = 100){
+                     repeats = 1, return_all_runs = FALSE, max_iter = 100,
+                     negcheck_iter = 30, neg_limit = -1){
 
     # Capture arguments for return to user in rcorex object
     cl <- match.call()
@@ -75,6 +78,7 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
         alpha <- inits$alpha
         p_y_given_x_3d <- inits$p_y_given_x_3d
         log_z <- inits$log_z
+        state <- NULL # variable to hold final state of corex - i.e. converged, not-converged or persistent negative tcs detected
 #        if (marginal_description == "discrete"){
 #            values_in_data <- sort(unique(unlist(data))) # Get the set of unique values in the data
 #            values_in_data <- values_in_data[!is.na(values_in_data)] # remove NA if it is there
@@ -123,14 +127,31 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
                              paste0(format(as.vector(tcs), digits = 3),
                                     collapse=" ")))
             }
-            if( check_converged(tc_history, eps)==TRUE ) break
+            if( check_converged(tc_history, eps)==TRUE ){
+                state <- "Converged"
+                if( sum(tcs) < 0 ){
+                    state <- "Negative tcs"
+                }
+                break
+            }
+
+            # Detect persistent negative tcs and break out of loop if detected
+            if ( nloop == negcheck_iter ){
+                if( all( sapply(tc_history, sum)[5:negcheck_iter] < neg_limit) ){
+                    state <- "Negative tcs"
+                    break
+                }
+            }
+            if ( nloop == max_iter ){
+                state <- "Unconverged"
+            }
         }
 
         # Package results for return to user
         # mis <- calculate_mis(data, theta, marginal_description, p_y_given_x_3d, dim_visible)
         results <- sort_results(data, cl, n_hidden, dim_visible = NULL, marginal_description,
                                 smooth_marginals, tcs, alpha, p_y_given_x_3d,
-                                theta, log_p_y, log_z, tc_history, names)
+                                theta, log_p_y, log_z, tc_history, names, state)
         return(results)
         #repeat_results[[m]] <- results
     })
