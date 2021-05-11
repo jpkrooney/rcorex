@@ -138,7 +138,7 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
             # Detect persistent negative tcs and break out of loop if detected
             if ( nloop == negcheck_iter ){
                 if( all( sapply(tc_history, sum)[5:negcheck_iter] < neg_limit) ){
-                    state <- "Negative tcs"
+                    state <- "Persistent negative tcs"
                     break
                 }
             }
