@@ -18,7 +18,8 @@ sort_results(
   log_p_y,
   log_z,
   tc_history,
-  names
+  names,
+  state
 )
 }
 \arguments{
@@ -49,6 +50,8 @@ sort_results(
 \item{tc_history}{A list that records the TC results for each iteration of the algorithm. Used to calculate if convergence has been reached.}
 
 \item{names}{A vector of the variables names of the supplied data.}
+
+\item{state}{A string that describes the final state of corex (i.e. "Converged", "Negative tcs", "Unconverged").}
 }
 \value{
 Returns list of corex algorthim results sorted in descending order by TC of the latent variables. The list includes the following elements:
