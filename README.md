@@ -19,8 +19,7 @@ to implement Total Correlation Explanation in the R statistical
 software, specifically to replicate the functionality of the Bio CorEx
 Python module ( <https://github.com/gregversteeg/bio_corex> ) which is
 designed to be suitable for biomedical datasets. This is implemented in
-the `biocorex()` command. The `epicorex()` command extends the
-functionality to allow the use of data with mixed data types.
+the `biocorex()` command.
 
 The theoretical framework behind the CorEx and Bio CorEx Python modules
 are laid out in the following academic papers:  
