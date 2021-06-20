@@ -14,7 +14,9 @@ epicorex(
   verbose = FALSE,
   repeats = 1,
   return_all_runs = FALSE,
-  max_iter = 100
+  max_iter = 100,
+  negcheck_iter = 30,
+  neg_limit = -1
 )
 }
 \arguments{
@@ -37,6 +39,10 @@ epicorex(
 \item{return_all_runs}{Default FALSE. If FALSE epicorex returns a single object of class rcorex. If TRUE epicorex returns all runs of epicorex as a list - the length of which = \code{repeats}. In this case the returned results are not rcorex objects, but have the same components of an rcorex object with class list.}
 
 \item{max_iter}{numeric. Maximum number of iterations before ending. Default = 100}
+
+\item{negcheck_iter}{numeric. Number of iterations at which to check for persistent negative total tcs. IF detected the corex run stops. The default is 30.}
+
+\item{neg_limit}{numeric. At the negcheck_iter number of iterations, all prior iterations are checked versus this value. If all values are below this value, persistent negative tcs is declared. This is an indication that some data is not well described by the marginal description used. The default is -1.}
 }
 \value{
 Returns either a rcorex object or a list of repeated runs as determined by the \code{return_all_runs} argument. An rcorex object is a list that contains the following components:

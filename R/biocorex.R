@@ -76,6 +76,7 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
         alpha <- inits$alpha
         p_y_given_x_3d <- inits$p_y_given_x_3d
         log_z <- inits$log_z
+        state <- NULL # variable to hold final state of corex - i.e. converged, not-converged or persistent negative tcs detected
         if (marginal_description == "discrete"){
             values_in_data <- unique(sort(unlist(data))) # Get the set of unique values in the data
             values_in_data <- values_in_data[!is.na(values_in_data)] # remove NA if it is there
@@ -123,13 +124,30 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
                              paste0(format(as.vector(tcs), digits = 3),
                                     collapse=" ")))
             }
-            if( check_converged(tc_history, eps)==TRUE ) break
+            if( check_converged(tc_history, eps)==TRUE ){
+                state <- "Converged"
+                if( sum(tcs) < 0 ){
+                    state <- "Negative tcs"
+                }
+                break
+            }
+
+            # Detect persistent negative tcs and break out of loop if detected
+            #if ( nloop == negcheck_iter ){
+            #    if( all( sapply(tc_history, sum)[5:negcheck_iter] < neg_limit) ){
+            #        state <- "Persisten negative tcs"
+            #        break
+            #    }
+            #}
+            if ( nloop == max_iter ){
+                state <- "Unconverged"
+            }
         }
 
         # Package results for return to user
         results <- sort_results(data, cl, n_hidden, dim_visible, marginal_description,
                                 smooth_marginals, tcs, alpha, p_y_given_x_3d,
-                                theta, log_p_y, log_z, tc_history, names)
+                                theta, log_p_y, log_z, tc_history, names, state)
         #results$marg <- log_marg_x_4d
         return(results)
     })

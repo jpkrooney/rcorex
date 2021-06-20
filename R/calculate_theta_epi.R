@@ -33,7 +33,7 @@ calculate_theta_epi <- function(data, p_y_given_x_3d, marginal_description,
                                          p_y_given_x_3d[, not_missing, , drop = FALSE],
                                          smooth_marginals)
         } else {
-            stop(paste0("The marginal description, ", marginal_description[i], "is not implemented."))
+            stop(paste0("The marginal description, ", marginal_description[i], " is not implemented."))
         }
     } )
 
