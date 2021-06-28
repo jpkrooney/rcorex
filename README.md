@@ -66,6 +66,15 @@ plot(fit1)
 <img src="man/figures/README-example-1.png" width="100%" />
 
 ``` r
+summary(fit1)
+#> rcorex model call: 
+#> biocorex(data = df1, n_hidden = 2, dim_hidden = 2, marginal_description = "discrete")
+#> Data dimensions: 4 rows by 5 columns.
+#> Latent variable parameters: rcorex searched for 2 hidden variables with 2 possible states.
+#> Model outcome state: Converged
+#> Numer of iterations performed: 16
+#> Total TCS at final iteration: 2.0769
+
 # What was the total correlation for each hidden dimension ?
 fit1$tcs
 #> [1] 1.3847955 0.6921477

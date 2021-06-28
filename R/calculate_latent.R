@@ -8,6 +8,7 @@
 #' @param log_marg_x_4d A 4D array the contains the value of the marginal distribution for each variable, for each dimension of each hidden variable and for each data row.
 #' @return 3D array of numerics in range (0, 1), that represent the probability for n_hidden latent y variables of dimension dim_hidden, for each observed x variable with dimensions (n_hidden, n_samples, dim_hidden)
 #'
+#' @keywords internal
 #'
 calculate_latent <- function(data, alpha, log_p_y, log_marg_x_4d){
     # Get data and parameter dimensions

@@ -24,3 +24,4 @@ Internal function to calculate the probability distribution for hidden factors f
 \details{
 Calculate the probability distribution for each latent y variable given the data, the marginals and the probability of each y. This calculation is represented by Equation 16 of \strong{Greg Ver Steeg and Aram Galstyan. Maximally Informative Hierarchical Representations of High-Dimensional Data. 2015.} \url{https://arxiv.org/abs/1410.7404 }
 }
+\keyword{internal}

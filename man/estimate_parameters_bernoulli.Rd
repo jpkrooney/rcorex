@@ -22,3 +22,4 @@ Internal function to estimate parameters for binary data
 \details{
 Estimates the probability of each dim_visible occurring for each dim_hidden across each n_hidden.
 }
+\keyword{internal}

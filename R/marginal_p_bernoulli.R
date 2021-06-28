@@ -8,6 +8,8 @@
 #'
 #' @return A three dimensional array of marginals with dimensions: \code{(n_hidden, n_samples, dim_hidden)} - i.e. marginals for each data point in x_i given current \emph{n_hidden x dim_hidden} parameter estimates
 #'
+#' @keywords internal
+#'
 marginal_p_bernoulli <- function(x_i, thetai) {
     # Get parameter dimensions from parameters object
     n_hidden <- dim(thetai)[2]

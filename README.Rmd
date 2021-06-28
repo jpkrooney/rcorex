@@ -53,6 +53,7 @@ df1 <- matrix(c(0,0,0,0,0,
 set.seed(1234)
 fit1 <- biocorex(df1, n_hidden = 2, dim_hidden = 2, marginal_description = "discrete")
 plot(fit1)
+summary(fit1)
 
 # What was the total correlation for each hidden dimension ?
 fit1$tcs

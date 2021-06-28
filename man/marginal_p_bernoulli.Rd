@@ -20,3 +20,4 @@ Internal function to estimate the marginals for binary (bernoulli) data.
 \details{
 Estimate the marginals for a single column of data \code{x_i} for each hidden variable with dimension dim_hidden. For discrete data this can be calculated directly from the data.
 }
+\keyword{internal}

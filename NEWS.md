@@ -2,6 +2,7 @@
 * Removed `minmarg` as argument from `biocorex()` and `epicorex()`
 * Restored `sig_ml` minimal value to the `estimate_parameters_gaussian()` function to prevent divide by zero errors in the `marginal_p_gaussian()` function. However, now the minimal value is instead set to the machine floating point minimum value. As a result, `biocorex()` may sometimes produce negative `tcs`. This is an indication that the data is non-gaussian and such results should not be trusted. This might occur, for example, when binary data is fit with a gaussian marginal description.
 * Minor code optimization to speed up calculating the discrete and bernoulli
+* Summary methods added
 
 # rcorex 0.2.2
 * Minor code optimization to speed up calculating the gaussian marginals

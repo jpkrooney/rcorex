@@ -1,5 +1,5 @@
-#' @title epicorex
-#' @description Port of Python epicorex function
+#' @title Fit epicorex to a dataset
+#' @description Function which implements the CorEx algorithm for data with features of typical biomedical data such as continuous variables, missing data and under-sampled data, and extended to accommodate mixed marginal descriptions (i.e. mixed data types)
 #' @details
 #' This function is an extension of the biocorex function to allow for mixed data-types as typically found in epidemiological datasets - e.g. categorical data + continuous data for example.
 #' @param data Data provided by user. Allows for mixed data types. Eg categorical or binomial or continuous or discrete in same dataset

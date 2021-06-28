@@ -2,7 +2,7 @@
 % Please edit documentation in R/epicorex.R
 \name{epicorex}
 \alias{epicorex}
-\title{epicorex}
+\title{Fit epicorex to a dataset}
 \usage{
 epicorex(
   data,
@@ -65,7 +65,7 @@ Returns either a rcorex object or a list of repeated runs as determined by the \
 }
 }
 \description{
-Port of Python epicorex function
+Function which implements the CorEx algorithm for data with features of typical biomedical data such as continuous variables, missing data and under-sampled data, and extended to accommodate mixed marginal descriptions (i.e. mixed data types)
 }
 \details{
 This function is an extension of the biocorex function to allow for mixed data-types as typically found in epidemiological datasets - e.g. categorical data + continuous data for example.

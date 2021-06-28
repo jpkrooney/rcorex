@@ -6,6 +6,8 @@
 #' @param ord Vector of integers that give desired reorder sequence
 #' @return Returns a new version of theta reordered according to the pattern supplied to \code{ord}
 #'
+#' @keywords internal
+#'
 reorder_theta_epi <- function(theta, marginal_description, ord){
 
     for( i in 1:length(theta)){
