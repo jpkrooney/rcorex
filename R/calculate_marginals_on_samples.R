@@ -7,13 +7,14 @@
 #' @param marginal_description Character string which determines the marginal distribution of the data. A single marginal description applies to all variables in biocorex.
 #' @param log_p_y A 2D matrix representing the log of the marginal probability of the latent variables
 #' @param dim_visible The dimension of the data provided - i.e. the number of discrete levels that exist in the data. Must be positive integer.
+#' @param returnratio A boolean that returns log_p_xi_given_y_4d. Intended for development use and may not be retained long term.
 #'
 #' @return 4D array of dimensions: \code{(n_hidden, n_samples, n_visible, dim_hidden )} where n_samples is the number of rows in the user provided data, and n_visible is the number of columns. Returned data is result fo the calculation \eqn{log \left( \frac{p\left(y_{j} \mid x_{i}\right)}{p\left(y_{j}\right)} \right))} for each j,sample,i,y_j
 #'
 #'@keywords internal
 #'
 calculate_marginals_on_samples <- function(data, theta, marginal_description,
-                                           log_p_y,  dim_visible=NULL){
+                                           log_p_y,  dim_visible=NULL, returnratio = TRUE){
     # Get data and parameter dimensions
     n_hidden <- dim(log_p_y)[1]
     dim_hidden <- dim(log_p_y)[2]
@@ -30,33 +31,34 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
     } else {
         stop("Invalid marginals (from fn calculate_marginals_on_samples()")
     }
+    # Pack marginals, log p(xi|y), into 4D array
+    log_p_xi_given_y_4d <- aperm( array( unlist( calcs_results ),
+                                   dim = c(n_hidden, dim_hidden, n_samples, n_visible) ),
+                            c(1, 3, 4, 2))
 
-    # Pack results into 4D array
-    #log_marg_x_4d <- array( unlist( calcs_results ),
-    #                  dim = c(n_hidden, n_samples, dim_hidden, n_visible) )
-    #log_marg_x_4d <- aperm(log_marg_x_4d, c(1, 2, 4, 3))
-    log_marg_x_4d <- array( unlist( calcs_results ),
-                            dim = c(n_hidden, dim_hidden, n_samples, n_visible) )
-    log_marg_x_4d <- aperm(log_marg_x_4d, c(1, 3, 4, 2))
+    if(returnratio == FALSE){
+        return(log_p_xi_given_y_4d)
+    } else {
+        # Broadcast log_p_y to 4D and permute as preparatory step for ratio calculation
+        log_p_y_4d <- aperm( array( log_p_y, dim = c( dim(log_p_y), n_visible,  n_samples)),
+                             c(1, 4, 3, 2))
 
-    # to add and subtract with log_p_y need to broadcast in permuted form across extra dimensions
-    log_p_y_4d <- aperm( array( rep(log_p_y, n_samples * n_visible),
-                                dim = c( dim(log_p_y), n_visible,  n_samples)),
-                         c(1, 4, 3, 2))
+        #### Calculate ratio ####
+        # Aim is to calculate log ( p(xi|y)/p(xi) ) - or log (p(y|xi)/p(y)) by Bayes rule
+        # Approach is to calculate log p(y|xi) = log p(xi,y) - log p(x) where p(x) = sum p(xi,y) over all y
 
-    # Now add 4D form of log_p_y to log marginals
-    log_marg_x_4d <- log_marg_x_4d + log_p_y_4d
+        # calculate log p(xi,y) = log p(xi|y) + log p(y)
+        log_joint_pxi_y <- log_p_xi_given_y_4d + log_p_y_4d
 
-    # Calculate logSumExp term
-    term <- logSumExp4D(log_marg_x_4d)
+        # Calculate log p(y|xi) = log p(xi,y) - logsumexp log p(xi,y)
+        log_p_x <- logSumExp4D( log_joint_pxi_y )
+        log_p_y_given_xi <- log_joint_pxi_y - c( log_p_x )
 
-    # Subtract logSumExp from marginals
-    log_marg_x_4d <- log_marg_x_4d - c(term)
+        # Finally, calculate log ( p(y|xi)/p(y) ) = logp(y|xi) - log(p_y)
+        log_marg_x_4d <- log_p_y_given_xi - log_p_y_4d
 
-    # Finally subtract log_p_y_4d again
-    log_marg_x_4d <- log_marg_x_4d - log_p_y_4d
-
-    return(log_marg_x_4d)
+        return(log_marg_x_4d)
+    }
 }
 
 # Helper function
