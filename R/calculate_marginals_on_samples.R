@@ -37,7 +37,7 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
                             c(1, 3, 4, 2))
 
     if(returnratio == FALSE){
-        return( log_p_xi_given_y_4d )
+        return(log_p_xi_given_y_4d)
     } else {
         # Broadcast log_p_y to 4D and permute as preparatory step for ratio calculation
         log_p_y_4d <- aperm( array( log_p_y, dim = c( dim(log_p_y), n_visible,  n_samples)),
@@ -57,7 +57,7 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
         # Finally, calculate log ( p(y|xi)/p(y) ) = logp(y|xi) - log(p_y)
         log_marg_x_4d <- log_p_y_given_xi - log_p_y_4d
 
-        return( log_marg_x_4d )
+        return(log_marg_x_4d)
     }
 }
 
