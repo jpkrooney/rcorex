@@ -37,7 +37,7 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
                             c(1, 3, 4, 2))
 
     if(returnratio == FALSE){
-        return(log_p_xi_given_y_4d)
+        return( log_p_xi_given_y_4d )
     } else {
         # Broadcast log_p_y to 4D and permute as preparatory step for ratio calculation
         log_p_y_4d <- aperm( array( log_p_y, dim = c( dim(log_p_y), n_visible,  n_samples)),
@@ -57,18 +57,18 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
         # Finally, calculate log ( p(y|xi)/p(y) ) = logp(y|xi) - log(p_y)
         log_marg_x_4d <- log_p_y_given_xi - log_p_y_4d
 
-        return(log_marg_x_4d)
+        return( log_marg_x_4d )
     }
 }
 
 # Helper function
-logSumExp4D <- function (data) {
-    dims <- dim(data)[1:3]
-    dropdim <- dim(data)[4]
+logSumExp4D <- function( log_joint_pxi_y ) {
+    dims <- dim( log_joint_pxi_y )[1:3]
+    dropdim <- dim( log_joint_pxi_y )[4]
     len_res <- prod( dims )   # length of results object
-    dim( data ) <- c( len_res, dropdim ) # reshape data from 4D to 2D
-    rmaxs <- rowMaxs(data) # get max of each row
-    res <- rmaxs + log(rowSums( exp( (data) - rmaxs ) ) ) # perform logsumexp calc
+    dim( log_joint_pxi_y ) <- c( len_res, dropdim ) # reshape data from 4D to 2D
+    rmaxs <- rowMaxs( log_joint_pxi_y ) # get max of each row
+    res <- rmaxs + log(rowSums( exp( ( log_joint_pxi_y ) - rmaxs ) ) ) # perform logsumexp calc
     res <- array(res, dim = dims) #reshape for returning to calling function
     return(res)
 }
