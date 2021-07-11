@@ -9,7 +9,8 @@ calculate_marginals_on_samples(
   theta,
   marginal_description,
   log_p_y,
-  dim_visible = NULL
+  dim_visible = NULL,
+  returnratio = TRUE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ calculate_marginals_on_samples(
 \item{log_p_y}{A 2D matrix representing the log of the marginal probability of the latent variables}
 
 \item{dim_visible}{The dimension of the data provided - i.e. the number of discrete levels that exist in the data. Must be positive integer.}
+
+\item{returnratio}{A boolean that returns log_p_xi_given_y_4d. Intended for development use and may not be retained long term.}
 }
 \value{
 4D array of dimensions: \code{(n_hidden, n_samples, n_visible, dim_hidden )} where n_samples is the number of rows in the user provided data, and n_visible is the number of columns. Returned data is result fo the calculation \eqn{log \left( \frac{p\left(y_{j} \mid x_{i}\right)}{p\left(y_{j}\right)} \right))} for each j,sample,i,y_j

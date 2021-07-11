@@ -29,9 +29,9 @@ calculate_latent <- function(data, alpha, log_p_y, log_marg_x_4d){
     for(i in 1:dim_hidden){
         alpha_3d[, , i] <- alpha
     }
-    # Create and array to hold result
-    einsum_result <- array( rep(0, n_hidden * n_samples * dim_hidden),
-                            dim = c(n_hidden, n_samples, dim_hidden))
+    # Create an array of 0's to hold result
+    einsum_result <- array( 0, dim = c(n_hidden, n_samples, dim_hidden))
+
     # Perform calculation
     for (i in 1: dim(log_marg_x_4d)[1]) {
             for( l in 1: dim(log_marg_x_4d)[4] ) {
