@@ -45,7 +45,8 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
 
         #### Calculate ratio ####
         # Aim is to calculate log ( p(xi|y)/p(xi) ) - or log (p(y|xi)/p(y)) by Bayes rule
-        # Approach is to calculate log p(y|xi) = log p(xi,y) - log p(x) where p(x) = sum p(xi,y) over all y
+        # Approach is to calculate log p(y|xi) = log p(xi,y) - log p(x)
+        # where p(x) = sum p(xi,y) over all y
 
         # calculate log p(xi,y) = log p(xi|y) + log p(y)
         log_joint_pxi_y <- log_p_xi_given_y_4d + log_p_y_4d
