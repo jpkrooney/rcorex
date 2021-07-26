@@ -14,7 +14,8 @@ biocorex(
   verbose = FALSE,
   repeats = 1,
   return_all_runs = FALSE,
-  max_iter = 100
+  max_iter = 100,
+  logpx_method
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ biocorex(
 \item{return_all_runs}{Default FALSE. If FALSE biocorex returns a single object of class rcorex. If TRUE biocorex returns all runs of biocorex as a list - the length of which = \code{repeats}. In this case the returned results are not rcorex objects, but have the same components of an rcorex object with class list.}
 
 \item{max_iter}{numeric. Maximum number of iterations before ending. Default = 100}
+
+\item{logpx_method}{EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. If "pycorex" uses the same method as the Python version of biocorex, if set to "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates. NOTE, that mean may become the default option after further testing.}
 }
 \value{
 Returns either a rcorex object or a list of repeated runs as determined by the \code{return_all_runs} argument. An rcorex object is a list that contains the following components:

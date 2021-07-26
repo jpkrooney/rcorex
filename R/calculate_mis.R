@@ -7,11 +7,11 @@
 #' @param dim_visible The dimension of the data provided in data - i.e. the number of discrete levels that exist in the data. Must be positive integer.
 #' @param log_p_y A 2D matrix representing the log of the marginal probability of the latent variables.
 #' @return Returns an array of normalised mutual information with number of columns = n_visible and number of rows = n_hidden.
-#'
+#' @param logpx_method EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "pycorex" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across y estimates.
 #'@keywords internal
 #'
 calculate_mis <- function(data, theta, marginal_description, log_p_y,
-                          p_y_given_x_3d, dim_visible ){
+                          p_y_given_x_3d, dim_visible, logpx_method ){
 
     n_hidden <- dim(log_p_y)[1]
     dim_hidden <- dim(log_p_y)[2]
@@ -25,7 +25,8 @@ calculate_mis <- function(data, theta, marginal_description, log_p_y,
 
     # Calculate marginals
     log_marg_x_4d <- calculate_marginals_on_samples(data[samp,], theta, marginal_description,
-                                                    log_p_y, dim_visible)
+                                                    log_p_y, dim_visible, returnratio = TRUE,
+                                                    logpx_method)
 
     #####
     # This section performs equivalent calculation to

@@ -8,12 +8,13 @@
 #' @param dim_visible The dimension of the data provided in data - i.e. the number of discrete levels that exist in the data. Must be positive integer.
 #' @param smooth_marginals Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.
 #' @param n_permutes numeric to specify number of bootstrap estimates to calculate. Default = 20
+#' @param logpx_method EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "pycorex" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates.
 #' @return Returns a list
 #' @keywords internal
 #'
 mi_bootstrap <- function(data, marginal_description, theta,
                          log_p_y, p_y_given_x_3d, dim_visible,
-                         smooth_marginals, n_permutes=20){
+                         smooth_marginals, n_permutes=20, logpx_method){
     # Extract key data parameters
     n_hidden <- dim(p_y_given_x_3d)[1]
     n_samples <- dim(data)[1]
@@ -32,7 +33,7 @@ mi_bootstrap <- function(data, marginal_description, theta,
                                               smooth_marginals)
         }
         mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, log_p_y,
-                                  p_y_given_x_3d, dim_visible )
+                                  p_y_given_x_3d, dim_visible, logpx_method )
     }
 
     bias <- apply(mis, c(1, 2), mean)

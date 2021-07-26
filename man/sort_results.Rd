@@ -19,7 +19,8 @@ sort_results(
   log_z,
   tc_history,
   names,
-  state
+  state,
+  logpx_method
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ sort_results(
 \item{names}{A vector of the variables names of the supplied data.}
 
 \item{state}{A string that describes the final state of corex (i.e. "Converged", "Negative tcs", "Unconverged").}
+
+\item{logpx_method}{EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "pycorex" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates.}
 }
 \value{
 Returns list of corex algorthim results sorted in descending order by TC of the latent variables. The list includes the following elements:

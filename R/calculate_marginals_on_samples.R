@@ -8,14 +8,14 @@
 #' @param log_p_y A 2D matrix representing the log of the marginal probability of the latent variables
 #' @param dim_visible The dimension of the data provided - i.e. the number of discrete levels that exist in the data. Must be positive integer.
 #' @param returnratio A Boolean that returns log_marg_x_4d for the value TRUE and log_p_xi_given_y_4d for the value FALSE. Intended for development use and may not be retained long term.
-#' @param logpx_method EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "default" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across y estimates.
+#' @param logpx_method EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "pycorex" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates.
 #' @return 4D array of dimensions: \code{(n_hidden, n_samples, n_visible, dim_hidden )} where n_samples is the number of rows in the user provided data, and n_visible is the number of columns. Returned data is result fo the calculation \eqn{log \left( \frac{p\left(y_{j} \mid x_{i}\right)}{p\left(y_{j}\right)} \right))} for each j,sample,i,y_j
 #'
 #'@keywords internal
 #'
 calculate_marginals_on_samples <- function(data, theta, marginal_description,
-                                           log_p_y,  dim_visible=NULL, returnratio = TRUE,
-                                           logpx_method = "default"){
+                                           log_p_y,  dim_visible = NULL, returnratio = TRUE,
+                                           logpx_method){
     # Get data and parameter dimensions
     n_hidden <- dim(log_p_y)[1]
     dim_hidden <- dim(log_p_y)[2]
@@ -53,15 +53,18 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
         log_joint_pxi_y <- log_p_xi_given_y_4d + log_p_y_4d
 
         # Calculate log p(y|xi) = log p(xi,y) - logsumexp log p(xi,y)
-        log_p_x <- logSumExp4D( log_joint_pxi_y )
-        if (logpx_method == "mean"){
+        if (logpx_method == "pycorex"){
+            log_p_x <- logSumExp4D( log_joint_pxi_y )
+        } else if (logpx_method == "mean"){
+            log_p_x <- logSumExp4D( log_joint_pxi_y )
             temp <- log_p_x
             dim(temp) <- c(n_hidden, n_visible * n_samples)
             log_p_x <- colMeans(temp)
             dim(log_p_x) <- c(n_samples, n_visible)
-        } else if ( !logpx_method %in% c("default", "mean")){
+        } else {
             stop("Invalid logpx_method specified.")
         }
+
         log_p_y_given_xi <- log_joint_pxi_y - c( log_p_x )
 
         # Finally, calculate log ( p(y|xi)/p(y) ) = logp(y|xi) - log(p_y)

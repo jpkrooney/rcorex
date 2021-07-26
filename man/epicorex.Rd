@@ -16,7 +16,8 @@ epicorex(
   return_all_runs = FALSE,
   max_iter = 100,
   negcheck_iter = 30,
-  neg_limit = -1
+  neg_limit = -1,
+  logpx_method
 )
 }
 \arguments{
@@ -43,6 +44,8 @@ epicorex(
 \item{negcheck_iter}{numeric. Number of iterations at which to check for persistent negative total tcs. IF detected the corex run stops. The default is 30.}
 
 \item{neg_limit}{numeric. At the negcheck_iter number of iterations, all prior iterations are checked versus this value. If all values are below this value, persistent negative tcs is declared. This is an indication that some data is not well described by the marginal description used. The default is -1.}
+
+\item{logpx_method}{EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. If "pycorex" uses the same method as the Python version of biocorex, if set to "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates. NOTE, that mean may become the default option after further testing.}
 }
 \value{
 Returns either a rcorex object or a list of repeated runs as determined by the \code{return_all_runs} argument. An rcorex object is a list that contains the following components:

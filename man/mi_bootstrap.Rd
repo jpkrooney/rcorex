@@ -12,7 +12,8 @@ mi_bootstrap(
   p_y_given_x_3d,
   dim_visible,
   smooth_marginals,
-  n_permutes = 20
+  n_permutes = 20,
+  logpx_method
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ mi_bootstrap(
 \item{smooth_marginals}{Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.}
 
 \item{n_permutes}{numeric to specify number of bootstrap estimates to calculate. Default = 20}
+
+\item{logpx_method}{EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "pycorex" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates.}
 }
 \value{
 Returns a list

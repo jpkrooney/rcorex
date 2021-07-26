@@ -10,7 +10,8 @@ calculate_mis(
   marginal_description,
   log_p_y,
   p_y_given_x_3d,
-  dim_visible
+  dim_visible,
+  logpx_method
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ calculate_mis(
 \item{p_y_given_x_3d}{A 3D array of numerics in range (0, 1), that represent the probability that each observed x variable belongs to n_hidden latent variables of dimension dim_hidden. p_y_given_x_3d has dimensions (n_hidden, n_samples, dim_hidden)}
 
 \item{dim_visible}{The dimension of the data provided in data - i.e. the number of discrete levels that exist in the data. Must be positive integer.}
+
+\item{logpx_method}{EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "pycorex" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across y estimates.}
 }
 \value{
 Returns an array of normalised mutual information with number of columns = n_visible and number of rows = n_hidden.

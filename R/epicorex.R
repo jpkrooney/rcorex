@@ -14,6 +14,7 @@
 #' @param max_iter numeric. Maximum number of iterations before ending. Default = 100
 #' @param negcheck_iter numeric. Number of iterations at which to check for persistent negative total tcs. IF detected the corex run stops. The default is 30.
 #' @param neg_limit numeric. At the negcheck_iter number of iterations, all prior iterations are checked versus this value. If all values are below this value, persistent negative tcs is declared. This is an indication that some data is not well described by the marginal description used. The default is -1.
+#' @param logpx_method EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. If "pycorex" uses the same method as the Python version of biocorex, if set to "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates. NOTE, that mean may become the default option after further testing.
 #' @return Returns either a rcorex object or a list of repeated runs as determined by the \code{return_all_runs} argument. An rcorex object is a list that contains the following components:
 #' #' \enumerate{
 #' \item{data - the user data supplied in call to corex.}
@@ -41,7 +42,8 @@
 epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
                      smooth_marginals = FALSE, eps = 1e-6, verbose = FALSE,
                      repeats = 1, return_all_runs = FALSE, max_iter = 100,
-                     negcheck_iter = 30, neg_limit = -1){
+                     negcheck_iter = 30, neg_limit = -1,
+                     logpx_method){
 
     # Capture arguments for return to user in rcorex object
     cl <- match.call()
@@ -107,7 +109,8 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
             theta <- calculate_theta_epi(data, p_y_given_x_3d, marginal_description,
                                      smooth_marginals)
             log_marg_x_4d <- calculate_marginals_on_samples(data, theta, marginal_description,
-                                                            log_p_y)
+                                                            log_p_y, returnratio = TRUE,
+                                                            logpx_method = logpx_method)
 
             # Structure learning step
             if (n_hidden > 1){
@@ -151,7 +154,8 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
         # mis <- calculate_mis(data, theta, marginal_description, p_y_given_x_3d, dim_visible)
         results <- sort_results(data, cl, n_hidden, dim_visible = NULL, marginal_description,
                                 smooth_marginals, tcs, alpha, p_y_given_x_3d,
-                                theta, log_p_y, log_z, tc_history, names, state)
+                                theta, log_p_y, log_z, tc_history, names, state,
+                                logpx_method = logpx_method)
         return(results)
         #repeat_results[[m]] <- results
     })

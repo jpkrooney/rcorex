@@ -15,6 +15,7 @@
 #' @param tc_history A list that records the TC results for each iteration of the algorithm. Used to calculate if convergence has been reached.
 #' @param names A vector of the variables names of the supplied data.
 #' @param state A string that describes the final state of corex (i.e. "Converged", "Negative tcs", "Unconverged").
+#' @param logpx_method EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. "pycorex" uses the same method as the Python version of biocorex, "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates.
 #' @keywords internal
 #' @return Returns list of corex algorthim results sorted in descending order by TC of the latent variables. The list includes the following elements:
 #' \enumerate{
@@ -37,7 +38,8 @@
 #'
 sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, smooth_marginals,
                          tcs, alpha, p_y_given_x_3d, theta,
-                         log_p_y, log_z, tc_history, names, state){
+                         log_p_y, log_z, tc_history, names, state,
+                         logpx_method){
 
     # Order components from strongest TC to weakest
     ord <- order(tcs, decreasing=TRUE)
@@ -69,7 +71,8 @@ sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, 
                                  marginal_description = marginal_description,
                                  log_p_y = results$log_p_y,
                                  p_y_given_x_3d = results$p_y_given_x,
-                                 dim_visible = dim_visible )
+                                 dim_visible = dim_visible,
+                                 logpx_method = logpx_method)
 
     # Adjust shape of alpha if n_hidden ==1
     if(n_hidden==1){ results$alpha <- t(matrix(results$alpha)) }
@@ -77,7 +80,7 @@ sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, 
     # Apply bootstrap of mis - moved here from biocorex() to avoid running this on discarded answers
     boot_res <- mi_bootstrap(data, marginal_description,
                              results$theta, results$log_p_y, results$p_y_given_x,
-                             dim_visible, smooth_marginals)
+                             dim_visible, smooth_marginals, logpx_method = logpx_method)
     results$mis <- (results$mis - boot_res$bias) * (results$mis > boot_res$sig)
 
     # Assign clusters to result variables (columns)

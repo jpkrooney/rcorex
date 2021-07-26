@@ -13,6 +13,7 @@
 #' @param repeats How many times to run biocorex on the data using random initial values. Corex will return the run which leads to the maximum TC. Default is 1. For a new dataset, recommend to leave it as 1 to see how long biocorex takes, however for more trustworthy results a higher numbers recommended (e.g. 25).
 #' @param return_all_runs Default FALSE. If FALSE biocorex returns a single object of class rcorex. If TRUE biocorex returns all runs of biocorex as a list - the length of which = \code{repeats}. In this case the returned results are not rcorex objects, but have the same components of an rcorex object with class list.
 #' @param max_iter numeric. Maximum number of iterations before ending. Default = 100
+#' @param logpx_method EXPERIMENTAL - A character string that controls the method used to calculate log_p_xi. If "pycorex" uses the same method as the Python version of biocorex, if set to "mean" calculates an estimate of log_p_xi by averaging across n_hidden estimates. NOTE, that mean may become the default option after further testing.
 #' @return Returns either a rcorex object or a list of repeated runs as determined by the \code{return_all_runs} argument. An rcorex object is a list that contains the following components:
 #' #' \enumerate{
 #' \item{data - the user data supplied in call to corex.}
@@ -39,7 +40,8 @@
 #'
 biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = "gaussian",
                      smooth_marginals = FALSE, eps = 1e-6, verbose = FALSE,
-                     repeats = 1, return_all_runs = FALSE, max_iter = 100 ){
+                     repeats = 1, return_all_runs = FALSE, max_iter = 100,
+                     logpx_method){
 
     # Capture arguments for return to user in rcorex object
     cl <- match.call()
@@ -104,7 +106,8 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
             theta <- calculate_theta(data, p_y_given_x_3d, marginal_description,
                                      smooth_marginals, dim_visible)
             log_marg_x_4d <- calculate_marginals_on_samples(data, theta, marginal_description,
-                                                                log_p_y,  dim_visible)
+                                                            log_p_y,  dim_visible,
+                                                            returnratio = TRUE, logpx_method)
 
             # Structure learning step
             if (n_hidden > 1){
@@ -147,7 +150,8 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
         # Package results for return to user
         results <- sort_results(data, cl, n_hidden, dim_visible, marginal_description,
                                 smooth_marginals, tcs, alpha, p_y_given_x_3d,
-                                theta, log_p_y, log_z, tc_history, names, state)
+                                theta, log_p_y, log_z, tc_history, names, state,
+                                logpx_method)
         #results$marg <- log_marg_x_4d
         return(results)
     })
