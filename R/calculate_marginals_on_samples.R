@@ -14,7 +14,8 @@
 #'@keywords internal
 #'
 calculate_marginals_on_samples <- function(data, theta, marginal_description,
-                                           log_p_y,  dim_visible=NULL, returnratio = TRUE){
+                                           log_p_y,  dim_visible=NULL, returnratio = TRUE,
+                                           logpx_method = "default"){
     # Get data and parameter dimensions
     n_hidden <- dim(log_p_y)[1]
     dim_hidden <- dim(log_p_y)[2]
@@ -52,10 +53,14 @@ calculate_marginals_on_samples <- function(data, theta, marginal_description,
         log_joint_pxi_y <- log_p_xi_given_y_4d + log_p_y_4d
 
         # Calculate log p(y|xi) = log p(xi,y) - logsumexp log p(xi,y)
-        if (logpx_method == "default"){
-            log_p_x <- logSumExp4D( log_joint_pxi_y )
-        } else if (logpx_method == "mean"){
-
+        log_p_x <- logSumExp4D( log_joint_pxi_y )
+        if (logpx_method == "mean"){
+            temp <- log_p_x
+            dim(temp) <- c(n_hidden, n_visible * n_samples)
+            log_p_x <- colMeans(temp)
+            dim(log_p_x) <- c(n_samples, n_visible)
+        } else if ( !logpx_method %in% c("default", "mean")){
+            stop("Invalid logpx_method specified.")
         }
         log_p_y_given_xi <- log_joint_pxi_y - c( log_p_x )
 
