@@ -70,7 +70,7 @@ summary(fit1)
 #> rcorex model call: 
 #> biocorex(data = df1, n_hidden = 2, dim_hidden = 2, marginal_description = "discrete", 
 #>     logpx_method = "pycorex")
-#> Data dimensions: 4 rows by 5 columns.
+#> Data dimensions: 4 samples (rows) by 5 variables (columns).
 #> Latent variable parameters: rcorex searched for 2 hidden variables with 2 possible states.
 #> Model outcome state: Converged
 #> Numer of iterations performed: 16

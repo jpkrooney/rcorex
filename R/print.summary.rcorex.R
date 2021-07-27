@@ -9,7 +9,7 @@ print.summary.rcorex <- function(x, ...) {
 
     cat("rcorex model call: \n")
     print(x$call)
-    cat(paste0("Data dimensions: ", x$datadim[1], " rows by ", x$datadim[2], " columns.\n"))
+    cat(paste0("Data dimensions: ", x$datadim[1], " samples (rows) by ", x$datadim[2], " variables (columns).\n"))
     cat(paste0("Latent variable parameters: rcorex searched for ", x$latentpars[1],
            " hidden variables with ", x$latentpars[2], " possible states.\n"))
     cat(paste0("Model outcome state: ", x$state, "\n"))
