@@ -1,4 +1,3 @@
-context("estimate_sig")
 test_that("estimate_sig function calculates expected result", {
 
     # Run tests

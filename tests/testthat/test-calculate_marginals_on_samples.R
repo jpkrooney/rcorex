@@ -1,5 +1,4 @@
-context("calculate_marginals_on_samples")
-test_that("marginal_p_discrete works", {
+test_that("calculate_marginals_on_samples works correctly", {
     expect_equal(calculate_marginals_on_samples(data = data,
                                                 theta = theta_result_gaussian_no_smooth,
                                                 marginal_description = "gaussian",

@@ -1,4 +1,3 @@
-context("logsumexp4D")
 test_that("logsumexp4D works", {
     expect_equal( logSumExp4D(log_joint_pxi_y = log_marg_x_4d_gaussian),
                   structure(c(0.83751126511956, 1.09585532275634, 0.83751126511956,

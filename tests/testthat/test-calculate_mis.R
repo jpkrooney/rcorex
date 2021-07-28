@@ -1,4 +1,3 @@
-context("calculate_mis")
 test_that("calculate_mis function calculates expected result", {
 
     # Run tests

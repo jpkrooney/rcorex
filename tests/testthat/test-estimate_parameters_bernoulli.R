@@ -1,4 +1,3 @@
-context("estimate_parameters_bernoulli")
 test_that("estimate_parameters_bernoulli result checks", {
 
     # check bernoulli algorithm on higher dimension data (6 by 6)

@@ -1,4 +1,3 @@
-context("initialise_parameters")
 test_that("initialise_parameters function calculates expected result", {
 
     # Run tests

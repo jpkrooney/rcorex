@@ -1,4 +1,3 @@
-context("estimate_parameters_gaussian")
 test_that("estimate_parameters_gaussian functions calculate expected result", {
 
     # Run tests

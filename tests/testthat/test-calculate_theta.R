@@ -1,4 +1,3 @@
-context("calculate_theta")
 test_that("calculate_theta produces expected result", {
     # Run tests
     expect_equal(calculate_theta(data = data, p_y_given_x_3d = p_y_given_x_3d,

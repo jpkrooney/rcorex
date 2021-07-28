@@ -1,4 +1,3 @@
-context("estimate_parameters_discrete")
 test_that("estimate_parameters_discrete result checks", {
     expect_equal(estimate_parameters_discrete(x_i = x_i, p_y_given_x_3d = p_y_given_x_3d,
                                               smooth_marginals = FALSE, dim_visible = 2),
