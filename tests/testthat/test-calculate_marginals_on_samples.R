@@ -3,7 +3,7 @@ test_that("calculate_marginals_on_samples works correctly", {
                                                 theta = theta_result_gaussian_no_smooth,
                                                 marginal_description = "gaussian",
                                                 log_p_y = log_p_y,
-                                                dim_visible = dim_visible,
+                                                dim_visible = NULL,
                                                 logpx_method = "pycorex"),
                  log_marg_x_4d_gaussian)
 
