@@ -1,5 +1,13 @@
 context("estimate_parameters_bernoulli")
 test_that("estimate_parameters_bernoulli result checks", {
+
+    # check bernoulli algorithm on higher dimension data (6 by 6)
+    expect_equal(estimate_parameters_bernoulli(x_i = databern6[, 1],
+                                               p_y_given_x_3d = py_givenx_bern6x6,
+                                               smooth_marginals = FALSE),
+                 bern6result)
+
+
     # Check if discrete and bernoulli produce the same answer for data with only 0 or 1
     expect_equal( estimate_parameters_discrete(x_i = data_est_tests[, 1],
                                                p_y_given_x_3d = p_y_given_x_3d_estimate_discrete,
@@ -7,12 +15,6 @@ test_that("estimate_parameters_bernoulli result checks", {
                   estimate_parameters_bernoulli(x_i = data_est_tests[, 1],
                                                 p_y_given_x_3d = p_y_given_x_3d_estimate_discrete,
                                                 smooth_marginals = FALSE))
-    # check bernoulli algorithm on higher dimension data (6 by 6)
-    expect_equal(estimate_parameters_bernoulli(x_i = databern6[, 1],
-                                               p_y_given_x_3d = py_givenx_bern6x6,
-                                               smooth_marginals = FALSE),
-                 bern6result)
-
 
 
     # check bernoulli and discrete algorithm when n_hidden x dim_hidden is an odd number
