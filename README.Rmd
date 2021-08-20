@@ -112,8 +112,13 @@ ggraph(g_hier, layout = "fr") +
 
 ```
 
-Additional hierarchical layers can be identified in larger datasets. Note that in the network graph, edge thickness is proportional to mutual information and node size represents mutual multivariate information among children.
+Additional hierarchical layers can be identified in larger datasets. 
 
 
+## Citation
+If you find `rcorex` useful in academic work please cite the package as follows:
+```{r citation}
+citation("rcorex")
+```
 
 

@@ -161,6 +161,28 @@ ggraph(g_hier, layout = "fr") +
 <img src="man/figures/README-iris_example_layer2-1.png" width="100%" />
 
 Additional hierarchical layers can be identified in larger datasets.
-Note that in the network graph, edge thickness is proportional to mutual
-information and node size represents mutual multivariate information
-among children.
+
+## Citation
+
+If you find `rcorex` useful in academic work please cite the package as
+follows:
+
+``` r
+citation("rcorex")
+#> 
+#> To cite rcorex in publications use:
+#> 
+#>   Rooney JPK (2021). rcorex: Discover latent structure in high
+#>   dimensional data. R package version 0.2.3.
+#>   https://github.com/jpkrooney/rcorex.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {rcorex: Discover latent structure in high dimensional data.},
+#>     author = {James PK Rooney},
+#>     year = {2021},
+#>     note = {R package version 0.2.3},
+#>     url = {https://github.com/jpkrooney/rcorex},
+#>   }
+```
