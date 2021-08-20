@@ -1,0 +1,14 @@
+
+citHeader("To cite rcorex in publications use:")
+
+citEntry(
+    entry    = "Manual",
+    title    = "rcorex: Discover latent structure in high dimensional data.",
+    author   = "James PK Rooney",
+    year     = 2021,
+    note     = "R package version 0.2.3",
+    url      = "https://github.com/jpkrooney/rcorex",
+    textVersion = paste("Rooney JPK (2021). rcorex: Discover latent structure in high dimensional data. R package version 0.2.3. https://github.com/jpkrooney/rcorex.")
+)
+
+
