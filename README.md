@@ -151,12 +151,11 @@ g_hier <- make_corex_tidygraph( list(layer1, layer2))
 
 # Plot network graph of hierarchical layers
 ggraph(g_hier, layout = "fr") +
-  geom_node_point(aes(size = node_size), show.legend = FALSE) +
-  geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
-  scale_edge_width(range = c(0.3, 3)) +
-  geom_node_text(aes(label = names), repel = TRUE) +
-  ggtitle("Hierarchical CorEx") +
-  theme_graph()
+    geom_node_point(aes(size = node_size), show.legend = FALSE) +
+    geom_edge_hive(aes(width = thickness), alpha = 0.75, show.legend = FALSE) +
+    scale_edge_width(range = c(0.3, 3)) +
+    geom_node_text(aes(label = names), repel = TRUE) +
+    theme_graph()
 ```
 
 <img src="man/figures/README-iris_example_layer2-1.png" width="100%" />
