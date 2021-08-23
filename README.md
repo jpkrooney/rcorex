@@ -9,6 +9,7 @@
 status](https://github.com/jpkrooney/rcorex/workflows/R-CMD-check/badge.svg)](https://github.com/jpkrooney/rcorex/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/jpkrooney/rcorex/branch/master/graph/badge.svg)](https://codecov.io/gh/jpkrooney/rcorex?branch=master)
+[![DOI](https://zenodo.org/badge/326518526.svg)](https://zenodo.org/badge/latestdoi/326518526)
 <!-- badges: end -->
 
 Total correlation explanation is method for discovering latent structure
@@ -174,7 +175,7 @@ citation("rcorex")
 #> 
 #>   Rooney JPK (2021). rcorex: Discover latent structure in high
 #>   dimensional data. R package version 0.2.3.
-#>   https://github.com/jpkrooney/rcorex.
+#>   https://github.com/jpkrooney/rcorex. doi: 10.5281/zenodo.5235604.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -183,6 +184,7 @@ citation("rcorex")
 #>     author = {James PK Rooney},
 #>     year = {2021},
 #>     note = {R package version 0.2.3},
+#>     doi = {10.5281/zenodo.5235604},
 #>     url = {https://github.com/jpkrooney/rcorex},
 #>   }
 ```

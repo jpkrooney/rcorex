@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![R build status](https://github.com/jpkrooney/rcorex/workflows/R-CMD-check/badge.svg)](https://github.com/jpkrooney/rcorex/actions)
 [![Codecov test coverage](https://codecov.io/gh/jpkrooney/rcorex/branch/master/graph/badge.svg)](https://codecov.io/gh/jpkrooney/rcorex?branch=master)
+[![DOI](https://zenodo.org/badge/326518526.svg)](https://zenodo.org/badge/latestdoi/326518526)
 <!-- badges: end -->
 
 
