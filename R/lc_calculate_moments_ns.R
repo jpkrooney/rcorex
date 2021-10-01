@@ -62,12 +62,10 @@ lc_calculate_moments_ns <- function(data, weights, quick, eps, yscale){
         m$'X_iY_j' <- t(m$rho) * sqrt(m$`Y_j^2`)
 
         # For m$'X_iZ_j' using Julia because R solve will crash sometimes
-        m$'X_iZ_j' <- t(solve(m$ry, m$rho))
-        #s <- chol(m$ry)
-        #m$'X_iZ_j' <- t(backsolve(s, forwardsolve(t(s), m$rho)))
-        #julia_assign("ry", structure(m$ry, class = "JuliaFloat32"))
-        #julia_assign("rho", structure(m$rho, class = "JuliaFloat32"))
-        #m$'X_iZ_j' <- t( julia_eval("ry \\ rho", "R") )
+        #m$'X_iZ_j' <- t(solve(m$ry, m$rho))
+        julia_assign("ry", structure(m$ry, class = "JuliaFloat32"))
+        julia_assign("rho", structure(m$rho, class = "JuliaFloat32"))
+        m$'X_iZ_j' <- t( julia_eval("ry \\ rho", "R") )
 
         #einsum calculation
         es_res <- rep(0, dim(m$'X_iZ_j')[1])

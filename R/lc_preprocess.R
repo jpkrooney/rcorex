@@ -11,7 +11,7 @@ lc_preprocess <- function(data, fit = FALSE, gaussianize, theta = NULL){
         # impute stuff here
         res <- lc_mean_impute(data)
         data <- res$data
-        n_obs <- n_obs
+        n_obs <- res$n_obs
     } else {
         n_obs <- nrow(data)
     }
@@ -22,7 +22,7 @@ lc_preprocess <- function(data, fit = FALSE, gaussianize, theta = NULL){
         } else if(gaussianize == "standard"){
             means <- colMeans(data)
             stds <- sqrt((rowSums( (t(data) - means )^2) / n_obs))
-            stds[ stds < 1e-10] <- 1e-10 # minimum
+            stds[ stds < 1e-10 ] <- 1e-10 # minimum
             theta <- list(means = means, stds = stds)
             data2 <- (data - rep(means, each=n_obs)) / rep(stds, each = n_obs)
             if(max(abs(data2)) > 6){
