@@ -62,7 +62,6 @@ estimate_se <- function(x_i, p_y_given_x_3d, num_obs, reps = 20){
     # Final step calculate standard errors for m1 and m2
     se1 <- sqrt(apply( (ml_means - c(m1)) ^2, c(1, 2), sum) / (0.95*reps) )
     se2 <- sqrt(apply( (ml_sigs - c(m2)) ^2, c(1, 2), sum) / (0.95*reps) )
-    # possible bug in above - might need to be t(t(ml_means) - m1) etc
 
     # Return results
     out <- list(m1 = m1,

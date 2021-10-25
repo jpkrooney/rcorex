@@ -103,9 +103,6 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
 
             # Update Marginals
             log_p_y <- calculate_p_y(p_y_given_x_3d)
-            # Next line For debug only - remove later
-            #if(debug == TRUE){ log_p_y<- round(log_p_y, 4) }
-            #
             theta <- calculate_theta_epi(data, p_y_given_x_3d, marginal_description,
                                      smooth_marginals)
             log_marg_x_4d <- calculate_marginals_on_samples(data, theta, marginal_description,
