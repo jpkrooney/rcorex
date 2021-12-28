@@ -41,7 +41,7 @@
 biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = "gaussian",
                      smooth_marginals = FALSE, eps = 1e-6, verbose = FALSE,
                      repeats = 1, return_all_runs = FALSE, max_iter = 100,
-                     logpx_method){
+                     logpx_method = "pycorex"){
 
     # Capture arguments for return to user in rcorex object
     cl <- match.call()
@@ -79,17 +79,10 @@ biocorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description = 
         p_y_given_x_3d <- inits$p_y_given_x_3d
         log_z <- inits$log_z
         state <- NULL # variable to hold final state of corex - i.e. converged, not-converged or persistent negative tcs detected
+
+        # If marginals are discrete, calculate dim_visible of whole dataset
         if (marginal_description == "discrete"){
-            values_in_data <- unique(sort(unlist(data))) # Get the set of unique values in the data
-            values_in_data <- values_in_data[!is.na(values_in_data)] # remove NA if it is there
-            dim_visible <- max(values_in_data) + 1
-            if( ! all( seq(0, (dim_visible - 1)) == values_in_data) ) {
-                warning("Data matrix values should be consecutive integers starting with 0,1,...")
-                # consider to make this a stop error ?
-            }
-            if ( max(values_in_data >31 )){
-                stop("To match Python version, discrete valued variables currently can take values from 0 to 31     only.") # May remove this
-            }
+            dim_visible <- get_dimvisible (data, max_dim = 31) # To match Python version, discrete valued variables currently can take values from 0 to 31 only.
         }
 
         # Initialise variable to track total correlation

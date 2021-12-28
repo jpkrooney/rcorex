@@ -1,7 +1,7 @@
 Package: rcorex
 Type: Package
 Title: An Implementation of Total Correlation Explanation
-Version: 0.2.3
+Version: 0.3.0
 Authors@R: person("James", "Rooney", email = "jrooney@rcsi.ie",
                   role = c("aut", "cre"))
 Maintainer: The package maintainer <jrooney@rcsi.ie>

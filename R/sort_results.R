@@ -56,11 +56,12 @@ sort_results <- function(data, cl, n_hidden, dim_visible, marginal_description, 
                      },
                      log_p_y = if(n_hidden ==1 ) { log_p_y} else {log_p_y[ord, ] },
                      log_z = log_z[ord,],
-                     dim_visible = if(length(marginal_description)==1) {
-                         if(marginal_description == "discrete"){
-                             dim_visible
-                         }
-                     } else { NULL },
+                     dim_visible = dim_visible,
+                     #if(length(marginal_description)==1) {
+                     #    if(marginal_description == "discrete"){
+                     #        dim_visible
+                     #    }
+                     #} else { NULL },
                      iterations = length(tc_history),
                      tc_history = tc_history,
                      marginal_description = marginal_description,

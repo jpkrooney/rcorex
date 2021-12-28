@@ -17,7 +17,7 @@ epicorex(
   max_iter = 100,
   negcheck_iter = 30,
   neg_limit = -1,
-  logpx_method
+  logpx_method = "pycorex"
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ epicorex(
 
 \item{dim_hidden}{Each hidden unit can take \code{dim_hidden} discrete values. Default = 2}
 
-\item{marginal_description}{Character string which determines the marginal distribution of the data.For epicorex, marginal_description must be a vector of strings of length equal to the number of columns in \code{data}. Allowable marginal descriptions are: gaussian, discrete, bernoulii currently - more may be added later.}
+\item{marginal_description}{Character string which determines the marginal distribution of the data. For epicorex, marginal_description must be a vector of strings of length equal to the number of columns in \code{data}. Allowable marginal descriptions are: gaussian, discrete, bernoulli currently - more may be added later.}
 
 \item{smooth_marginals}{Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.}
 
