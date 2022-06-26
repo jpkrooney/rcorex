@@ -42,7 +42,7 @@
 #'
 make_corex_tidygraph <- function( corexes ){
 
-    if( class(corexes) == "rcorex"){
+    if( inherits(corexes,"rcorex")){
         layer1 <- corexes
         edges <- calc_edge_thickness(layer1)
 
@@ -50,7 +50,7 @@ make_corex_tidygraph <- function( corexes ){
         node_size <- c(rep(0, length(names(layer1$clusters))), layer1$tcs )
         nodes <- data.frame(names= node_names, node_size = node_size)
 
-    } else if(class(corexes) == "list"){
+    } else if(inherits(corexes, "list")){
 
         if( ! all(lapply(corexes, class) == "rcorex") ){
             stop(" You can only enter rcorex objects as list. i.e. corexes = list(layer1, layer2)")
