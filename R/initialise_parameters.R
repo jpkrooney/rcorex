@@ -4,7 +4,6 @@
 #' @param data Data provided by user
 #' @param n_hidden integer. Integer number of hidden units. Default = 1
 #' @param dim_hidden integer. Each hidden unit can take dim_hidden discrete values. Default = 2
-#' @importFrom stats runif
 #' @return Returns a list consisting of 5 initialised corex parameters:
 #' \enumerate{
 #'  \item{n_samples is the number of rows in the user supplied data.}
