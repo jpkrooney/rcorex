@@ -1,6 +1,18 @@
-
-
-
+#' @title Fit linearcorex to a dataset
+#' @description EXPERIMENTAL implmentation of linearcorex algorithm
+#' @details
+#' Experimental implementation of  \url{https://github.com/gregversteeg/LinearCorex}. Currently not fully tested.
+#' @param data Data provided by user.
+#' @param n_hidden An integer number of hidden variables to search for. Default = 10.
+#' @param max_iter numeric. Maximum number of iterations. Default = 10000
+#' @param tol Tolerance
+#' @param anneal Default = TRUE
+#' @param discourage_overlap Default = TRUE
+#' @param gaussianize Default = standard
+#' @param verbose Default = FALSE
+#' @return Returns linearcorex fit objects as a list
+#' @export
+#'
 
 linearcorex <- function(data, n_hidden = 10, max_iter = 10000, tol = 1e-5,
                         anneal = TRUE,  # missing_values=None,
