@@ -7,3 +7,4 @@ debug_setup.R
 R/.DS_Store
 tests/.DS_Store
 .Rbuildignore
+longitudinal_debug.R

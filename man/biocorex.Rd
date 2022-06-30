@@ -15,7 +15,7 @@ biocorex(
   repeats = 1,
   return_all_runs = FALSE,
   max_iter = 100,
-  logpx_method
+  logpx_method = "pycorex"
 )
 }
 \arguments{

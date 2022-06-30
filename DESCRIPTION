@@ -1,17 +1,17 @@
 Package: rcorex
 Type: Package
 Title: An Implementation of Total Correlation Explanation
-Version: 0.2.3
+Version: 0.3.0
 Authors@R: person("James", "Rooney", email = "jrooney@rcsi.ie",
                   role = c("aut", "cre"))
-Maintainer: The package maintainer <jrooney@rcsi.ie>
+Maintainer: James Rooney <jrooney@rcsi.ie>
 Description: rcorex implements Total Correlation Explanation (CorEx) in R. CorEx is a computationally efficient approach to discovering hidden structure in high dimensional data.
 Depends: R (>= 3.6)
 Language: en-IE
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Imports: 
     magrittr (>= 1.5),
     matrixStats (>= 0.55.0),

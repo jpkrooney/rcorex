@@ -8,7 +8,8 @@ calculate_theta_epi(
   data,
   p_y_given_x_3d,
   marginal_description,
-  smooth_marginals
+  smooth_marginals,
+  dimvis_byvars
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ calculate_theta_epi(
 \item{marginal_description}{Character string which determines the marginal distribution of the data. single marginal description applies to all variables in biocorex}
 
 \item{smooth_marginals}{Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.}
+
+\item{dimvis_byvars}{For each variable the dimension of the data provided - i.e. the number of discrete levels that exist in the data. Must be positive integer.}
 }
 \value{
 Returns a list of estimated parameters. The list has length = number of columns in the supplied \code{data}. The elements of the returned list depend on the marginal_description as follows: \itemize{ \item If the marginal description is "gaussian" a list of 2 arrays the first of which represent the estimate means, the second the estimated standard deviations. Each of these lists will have dimensions (n_hidden, dim_hidden).\item If the marginal description is "discrete", each element contains a list of length...}

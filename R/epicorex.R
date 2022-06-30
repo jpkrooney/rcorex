@@ -5,7 +5,7 @@
 #' @param data Data provided by user. Allows for mixed data types. Eg categorical or binomial or continuous or discrete in same dataset
 #' @param n_hidden An integer number of hidden variables to search for. Default = 1.
 #' @param dim_hidden Each hidden unit can take \code{dim_hidden} discrete values. Default = 2
-#' @param marginal_description Character string which determines the marginal distribution of the data.For epicorex, marginal_description must be a vector of strings of length equal to the number of columns in \code{data}. Allowable marginal descriptions are: gaussian, discrete, bernoulii currently - more may be added later.
+#' @param marginal_description Character string which determines the marginal distribution of the data. For epicorex, marginal_description must be a vector of strings of length equal to the number of columns in \code{data}. Allowable marginal descriptions are: gaussian, discrete, bernoulli currently - more may be added later.
 #' @param smooth_marginals Boolean (TRUE/FALSE) which indicates whether Bayesian smoothing of marginal estimates should be used.
 #' @param eps The maximal change in TC across 10 iterations needed signal convergence
 #' @param verbose Default FALSE. If TRUE, epicorex feeds back to user the iteration count and TCS each iteration. Useful to see progression if fitting a larger dataset.
@@ -35,6 +35,7 @@
 #' }
 #'
 #' @import matrixStats
+#' @import stats
 #' @importFrom gtools rdirichlet
 #' @export
 #'
@@ -43,7 +44,7 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
                      smooth_marginals = FALSE, eps = 1e-6, verbose = FALSE,
                      repeats = 1, return_all_runs = FALSE, max_iter = 100,
                      negcheck_iter = 30, neg_limit = -1,
-                     logpx_method){
+                     logpx_method = "pycorex"){
 
     # Capture arguments for return to user in rcorex object
     cl <- match.call()
@@ -51,7 +52,7 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
     # To do - input data checks and prep
     # Detect factors...sapply(data, is.factor)
     if (all(sapply(data, is.factor))){
-        stop("Please convert factor variables to indicator variables. The indicator variables ahoudl be given the marginal description 'bernoulli'.")
+        stop("Please convert factor variables to indicator variables. The indicator variables should be given the marginal description 'bernoulli'.")
     }
 
     # Check all values are finite
@@ -64,6 +65,16 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
 
     # Capture variable names for later use
     names <- names(data)
+
+
+    # For columns mathcing marginals = discrete, calculate dim_visible of the column
+    dim_visible <- rep(NA, length(marginal_description))
+    for(i in 1:length(marginal_description)){
+        if (marginal_description[i] == "discrete"){
+            dim_visible[i] <- get_dimvisible(data[, i])
+        }
+    }
+
 
     # Loop over repeated runs of corex with different random initial values
     repeat_results <- lapply(1:repeats, function(m) {
@@ -81,16 +92,6 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
         p_y_given_x_3d <- inits$p_y_given_x_3d
         log_z <- inits$log_z
         state <- NULL # variable to hold final state of corex - i.e. converged, not-converged or persistent negative tcs detected
-#        if (marginal_description == "discrete"){
-#            values_in_data <- sort(unique(unlist(data))) # Get the set of unique values in the data
-#            values_in_data <- values_in_data[!is.na(values_in_data)] # remove NA if it is there
-#            dim_visible <- max(values_in_data) + 1
-#            if( ! all(seq(0, (dim_visible - 1)) == values_in_data) ) {
-#                warning("Data matrix values should be consecutive integers starting with 0,1,...")
-#                # consider to make this a stop error ?
-#            }
-#        }
-
 
         # Initialise variable to track total correlation
         tc_history <- list()
@@ -103,11 +104,8 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
 
             # Update Marginals
             log_p_y <- calculate_p_y(p_y_given_x_3d)
-            # Next line For debug only - remove later
-            #if(debug == TRUE){ log_p_y<- round(log_p_y, 4) }
-            #
             theta <- calculate_theta_epi(data, p_y_given_x_3d, marginal_description,
-                                     smooth_marginals)
+                                     smooth_marginals, dimvis_byvars = dim_visible)
             log_marg_x_4d <- calculate_marginals_on_samples(data, theta, marginal_description,
                                                             log_p_y, returnratio = TRUE,
                                                             logpx_method = logpx_method)
@@ -151,8 +149,7 @@ epicorex <- function(data, n_hidden = 1, dim_hidden = 2, marginal_description,
         }
 
         # Package results for return to user
-        # mis <- calculate_mis(data, theta, marginal_description, p_y_given_x_3d, dim_visible)
-        results <- sort_results(data, cl, n_hidden, dim_visible = NULL, marginal_description,
+        results <- sort_results(data, cl, n_hidden, dim_visible = dim_visible, marginal_description,
                                 smooth_marginals, tcs, alpha, p_y_given_x_3d,
                                 theta, log_p_y, log_z, tc_history, names, state,
                                 logpx_method = logpx_method)

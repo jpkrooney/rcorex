@@ -30,7 +30,7 @@ mi_bootstrap <- function(data, marginal_description, theta,
                                           smooth_marginals, dim_visible )
         } else {
             temp_theta <- calculate_theta_epi(data, p_y_given_x_3d, marginal_description,
-                                              smooth_marginals)
+                                              smooth_marginals, dim_visible)
         }
         mis[ , , i] <- calculate_mis(data, temp_theta, marginal_description, log_p_y,
                                   p_y_given_x_3d, dim_visible, logpx_method )

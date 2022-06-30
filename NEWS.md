@@ -1,3 +1,7 @@
+# rcorex 0.3.0
+* Added 'discrete' marginal type to `epicorex()` function
+* `logpx_method` parameter of `biocorex()` and `epicorex()` now defaults to 'pycorex'
+
 # rcorex 0.2.3
 * Removed `minmarg` as argument from `biocorex()` and `epicorex()`
 * Restored `sig_ml` minimal value to the `estimate_parameters_gaussian()` function to prevent divide by zero errors in the `marginal_p_gaussian()` function. However, now the minimal value is instead set to the machine floating point minimum value. As a result, `biocorex()` may sometimes produce negative `tcs`. This is an indication that the data is non-gaussian and such results should not be trusted. This might occur, for example, when binary data is fit with a gaussian marginal description.
