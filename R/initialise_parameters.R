@@ -27,7 +27,8 @@ initialise_parameters <- function(data, n_hidden, dim_hidden ){
     }
 
     # Initialise unnormalised log post. probability
-    temp <- gtools::rdirichlet(alpha= rep(1, dim_hidden), n= n_hidden*n_samples)
+    #     temp <- gtools::rdirichlet(alpha= rep(1, dim_hidden), n= n_hidden*n_samples)
+    temp <- gtoolsrdrich(alpha= rep(1, dim_hidden), n= n_hidden*n_samples)
     p_rand <- array( dim = c(n_hidden, n_samples, dim_hidden))
     for(i in 1: dim_hidden) {
         p_rand[ , , i] <- temp[, i]
@@ -46,3 +47,15 @@ initialise_parameters <- function(data, n_hidden, dim_hidden ){
                 log_z = log_z)
     return(out)
 }
+
+
+
+# helper function - copy of gtools::drichilet. Gtools package has become orphaned and is causing github actions failures for rcorex. Will restore use of gtools::rdrichilet if package is no longer orphaned
+gtoolsrdrich <- function (n, alpha)
+{
+    l <- length(alpha)
+    x <- matrix(rgamma(l * n, alpha), ncol = l, byrow = TRUE)
+    sm <- x %*% rep(1, l)
+    x/as.vector(sm)
+}
+

@@ -1,5 +1,6 @@
 #' Missing values in the data, x, are indicated by v. Wherever this value appears in x, it is replaced by the mean value taken from the marginal distribution of that column
 #'
+#'#'@keywords internal
 lc_mean_impute <- function(data){
     nsamp <- nrow(data)
     nv <- ncol(data)
@@ -17,7 +18,7 @@ lc_mean_impute <- function(data){
 
 
 #' Missing values in the data, x, are indicated by v. Wherever this value appears in x, it is replaced by a random value taken from the marginal distribution of that column
-
+#'@keywords internal
 
 lc_random_impute <- function(data){
     nsamp <- nrow(data)

@@ -26,7 +26,7 @@ linearcorex <- function(data, n_hidden = 10, max_iter = 10000, tol = 1e-5,
     m <- n_hidden  # Number of latent factors to learn
     n_samples <- nrow(data) ; nv <- ncol(data)
     res <- lc_preprocess(data, TRUE, gaussianize)
-    data <- res$data
+    data <- as.matrix(res$data)
     theta <- res$theta
 
     # Initialize parameters

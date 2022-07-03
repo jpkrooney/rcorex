@@ -23,7 +23,7 @@ weights <- matrix(c(-0.   ,  0.016, -0.034,  0.042,  0.097,
 #library(JuliaCall)
 #julia_command("import RCall.rcopytype; rcopytype(::Type{RCall.RClass{:JuliaFloat32}}, x::Ptr{RealSxp}) = Array{Float32}")
 
-
+#'@keywords internal
 
 lc_calculate_moments_ns <- function(data, weights, quick, eps, yscale){
     m <- list()

@@ -1,7 +1,7 @@
 #' Calculate moments based on the weights and samples. We also calculate and save MI, TC, additivity, and the value of the objective. Note it is assumed that <X_i^2> = 1!
 #'
 #'
-
+#'@keywords internal
 
 lc_calculate_moments_syn <- function(data, weights, eps, yscale){
     m <- list()

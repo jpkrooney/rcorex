@@ -1,5 +1,4 @@
-#
-
+#'@keywords internal
 
 lc_update_records <- function(histlc, moments, delta, verbose){
     # Print and store some statistics about each iteration

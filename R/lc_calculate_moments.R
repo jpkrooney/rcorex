@@ -3,7 +3,7 @@
 #        return self._calculate_moments_ns(x, ws, quick=quick)
 #else:
 #        return self._calculate_moments_syn(x, ws, quick=quick)
-
+#'@keywords internal
 
 lc_calculate_moments <- function(data, weights, quick = FALSE, discourage_overlap, eps, yscale){
     if(discourage_overlap == TRUE){
