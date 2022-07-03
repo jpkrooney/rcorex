@@ -1,6 +1,7 @@
 #'Transform an array of inputs, x, into an array of k latent factors, Y.
 #'Optionally, you can get the remainder information and/or stop at a specified level
-#
+#'
+#'@keywords internal
 
 lc_transform <- function(data, details = FALSE, lincor_obj){
 
@@ -16,7 +17,7 @@ lc_transform <- function(data, details = FALSE, lincor_obj){
 
     # Preprocess data
     processed = lc_preprocess(data, fit = FALSE, gaussianize = gaussianize, theta = theta)
-    data <- processed$data
+    data <- as.matrix(processed$data)
     theta <- processed$theta
 
     if( nv != ncol(weights)){

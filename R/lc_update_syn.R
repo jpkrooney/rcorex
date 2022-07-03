@@ -1,5 +1,6 @@
 #' Perform one update of the weights and re-calculate moments in the SYNERGISTIC case
 #'
+#'@keywords internal
 
 lc_update_syn <- function(data, moments, weights, eps, tol, yscale, verbose, eta = 0.5){
     m <- moments

@@ -36,7 +36,6 @@
 #'
 #' @import matrixStats
 #' @import stats
-#' @importFrom gtools rdirichlet
 #' @export
 #'
 #'

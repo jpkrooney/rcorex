@@ -1,7 +1,7 @@
 #' This uses E(Xi|Y) formula for non-synergistic relationships
 #'
 #'
-
+#'@keywords internal
 
 lc_get_covariance <- function(lincor_obj){
     m <- lincor_obj$moments

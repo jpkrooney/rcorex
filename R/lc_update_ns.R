@@ -1,6 +1,4 @@
-#
-
-
+#'@keywords internal
 lc_update_ns <- function(data, moments, weights, eps, tol, yscale, verbose){
     # Perform one update of the weights and re-calculate moments in the NON-SYNERGISTIC case.
 
