@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rcorex: Discover latent structure in high dimensional data.
+# rcorex: Discover latent structure in high dimensional data. <img src='man/figures/rcorexlogo.svg' align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -133,7 +133,7 @@ selects the run which produces the maximal TC to return to the user
 
 We can then use the labels from `layer1` as the input for a second layer
 of CorEx to discover hierarchical structure. Note that the value used
-for n\_hidden should be lower in the second layer than it was in the
+for n_hidden should be lower in the second layer than it was in the
 first.
 
 ``` r
